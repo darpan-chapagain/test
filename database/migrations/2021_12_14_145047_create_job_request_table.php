@@ -15,13 +15,14 @@ class CreateJobRequestTable extends Migration
     {
         Schema::create('job_request', function (Blueprint $table) {
             $table->id('job_employement_id');
-            $table->unsignedBigInteger('employee_id')
-                ->references('employee_id')->on('employee')
-                ->onDelete('cascade');
+            $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('job_id')
                 ->references('job_id')->on('post_jobs')
                 ->onDelete('cascade');
             $table->string('status');
+            $table->foreign('employee_id')
+                ->references('employee_id')->on('employees')
+                ->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }

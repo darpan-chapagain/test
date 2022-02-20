@@ -159,6 +159,7 @@ export default {
                 'mdi-instagram',
             ],
             drawer: null,
+            group: null,
         }
     },   
     methods:{

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,8 @@ class AuthController extends Controller
             'first_name' => 'required|string',
             // 'last_name' => 'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+            'password' => 'required|string|confirmed',
+            'role_id' =>  'required'
         ]);
         
         try{
@@ -24,7 +26,8 @@ class AuthController extends Controller
                 'first_name' => $fields['first_name'],
                 // 'last_name' => $fields['last_name'],
                 'email' => $fields['email'],
-                'password' => bcrypt($fields['password'])
+                'password' => bcrypt($fields['password']),
+                'role_id' => $fields['role_id']
             ]);
     
             $token = $user->createToken('myapptoken')->plainTextToken;
@@ -36,11 +39,34 @@ class AuthController extends Controller
             $token = null;
         }
 
+
+        try{
+            if($fields['role_id'] == 3){
+                $employee = Employee::create([
+                    'user_id' => $user->id,
+                    'qualification' => $request->qualification,
+                    'hourly_rate' => $request->hourly_rate, 
+                    'experience' => $request->experience,
+                    // 'skills' => $request->skills, 
+                    'employee_type' => $request->employee_type,
+                    'Job_Category_ID' => $request->Job_Category_ID,
+                ]);
+                $type = 'employee';
+            }else{
+                $type = 'user';
+            }
+        }catch (\Illuminate\Database\QueryException $ex){
+            $success = false;
+            $message = $ex->getMessage();
+            $token = null;
+        }
+
         $response = [
-            'user' => $user,
+            // 'user' => $user,
             'token' => $token,
             'success' => $success,
             'message' => $message,
+            'id' => $user->id,
         ];
 
         return response()->json($response);
@@ -66,6 +92,7 @@ class AuthController extends Controller
         // ];
 
         $response = [
+            'test' => Auth::user(),
             'success' => $success,
             'message' => $message,
         ];
@@ -116,6 +143,7 @@ class AuthController extends Controller
         
 
         $response = [
+            'test' => Auth::user(),
             'user' => $user,
             'token' => $token,
             'success' => $success,

@@ -5,6 +5,8 @@ import store from '../store'
 Vue.use(VueRouter)
 
 /* Guest Component */
+// const Test = () => import('../components/pages/test.vue' /* webpackChunkName: "resource/js/components/login" */)
+const Test = () => import('../components/pages/dateTest.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Login = () => import('../components/pages/Login.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Register = () => import('../components/pages/Register.vue' /* webpackChunkName: "resource/js/components/register" */)
 /* Guest Component */
@@ -23,6 +25,20 @@ const Routes = [
         name:"login",
         path:"/login",
         component:Login,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },{
+        name:"test",
+        path:"/test",
+        component:Test,
         meta:{
             middleware:"guest",
             title:`Login`

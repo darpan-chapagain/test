@@ -8,10 +8,13 @@ import App from './App.vue'
 import BootstrapVue from 'bootstrap-vue'
 import "bootstrap-vue/dist/bootstrap-vue.css"
 import Vuetify from '../plugins/vuetify'
+import moment from 'moment';
 
 
 // Vue.use(Vuex)
 Vue.use(BootstrapVue)
+window.moment = require('moment');
+// Vue.use(require('vue-moment'));
 
 
 //Register Routes
@@ -21,7 +24,8 @@ const app = new Vue({
     el: '#app',
     router:router,
     store:store,
-    render: h=> h(App)
+    moment:moment,
+    render: h=> h(App),
 });
 
 
