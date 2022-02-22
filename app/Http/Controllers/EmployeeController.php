@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\JobRequest;
+use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Session;
 
 class EmployeeController extends Controller
 {
@@ -123,5 +127,35 @@ class EmployeeController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function requstJob($id){
+        $authEmployee = auth()->user();
+        $job = Job::find($id);
+
+        $authUserId = $authEmployee->id;
+        $jobPostUserId = $job->user->id;
+        $employee = Employee::all()->where('user_id', $authUserId)->first();
+        // dd($job->id);
+        // dd($employee->employee_id);
+        // dd($authUserId, $jobPostUserId);
+
+        if($authUserId != $jobPostUserId){
+            $jobRequest = new JobRequest([
+                'employee_id' => $employee->employee_id,
+                'job_id' => $job->id,
+            ]);
+            $jobRequest->save();
+            $response = [
+                'job_request' => $jobRequest,
+                'message' => 'sucess',
+            ];
+        }else{
+            $response = [
+                'message' => 'Error: Unauthorized',
+            ];
+        }
+        return response()->json($response);
+
     }
 }

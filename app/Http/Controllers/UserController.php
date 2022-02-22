@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Job;
+use App\Models\Employee;
+use App\Models\JobRequest;
+use Illuminate\Support\Facades\Auth;
+use Session;
 // use Illuminate\Support\Facades\Auth;
 
 
@@ -133,10 +138,55 @@ class UserController extends Controller
     }
 
     public function getActiveUser(){
-        $user = User::where('status', '=', 1)->get();
+        // $user = User::where('status', '=', 1)->get();
+        $user = User::all()->where('status', '=', 1)->first();
         $response = [
             'active_user' => $user,
         ];
+        return response()->json($response);
+    }
+
+    public function offerJob(Request $request, $id){
+        $authUser = auth()->user();
+        // $employee = User::find($id);
+
+        $authUserId = $authUser->id;
+        // $employeeUserId = $employee->user->id;
+        $employee = Employee::all()->where('user_id', $id)->first();
+        // dd($job->id);
+        // dd($employee->employee_id);
+        // dd($authUserId, $employeeUserId);
+
+        if($authUserId != $id){
+            $job = new Job([
+                'user_id' => $authUserId,
+                'title' =>  $request->title,
+                'description' =>  $request->description,
+                'size' =>  $request->size, 
+                'time' =>  $request->time, 
+                'experience' =>  $request->experience,
+                'salary_offered' =>  $request->salary_offered,
+                'job_category_id' => $request->job_category_id,
+                'status' => 2,
+            ]);
+            $job->save();
+
+            $jobRequest = new JobRequest([
+                'employee_id' => $employee->employee_id,
+                'job_id' => $job->id,
+            ]);
+
+            $jobRequest->save();
+            $response = [
+                'job' => $job,
+                'job_request' => $jobRequest,
+                'message' => 'success',
+            ];
+        }else{
+            $response = [
+                'message' => 'Error: Unauthorized',
+            ];
+        }
         return response()->json($response);
     }
 }

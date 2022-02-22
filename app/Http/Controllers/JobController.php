@@ -159,4 +159,13 @@ class JobController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function getOtherJobs(){
+        $userID = auth()->user()->id;
+        $job = Job::all()->except($userID);
+        $reponse = [
+            'other_post' => $job,
+        ];
+        return response()->json($response);
+    }
 }

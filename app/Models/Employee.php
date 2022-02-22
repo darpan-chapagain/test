@@ -13,8 +13,11 @@ class Employee extends Model
 
     protected $fillable = ['user_id','qualification', 'hourly_rate', 'rating', 'experience', 'skills', 'employee_type', 'Job_Category_ID'];
 
-
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function jobRequests(){
+        return $this->hasMany(JobRequest::class, 'employee_id', 'employee_id');
     }
 }

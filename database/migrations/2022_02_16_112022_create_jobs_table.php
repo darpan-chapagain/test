@@ -23,7 +23,7 @@ class CreateJobsTable extends Migration
             $table->date('time')->nullable();
             $table->string('experience')->nullable();
             $table->integer('salary_offered')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')

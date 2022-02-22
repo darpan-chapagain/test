@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PostSkillController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JobRequestController;
+
 
 
 /*
@@ -36,7 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     // Route::delete('delete/{id}', [JobsController::class, 'delete']);
 });
 
-Route::group(['middleware' => ['auth:sanctum', 'isUser']], function(){
+Route::group(['middleware' => ['auth:sanctum']], function(){
     // Route::post('create', [JobController::class, 'create']);
     // Route::get('edit/{id}', [JobController::class, 'edit']);
     // Route::post('update/{id}', [JobController::class, 'update']);
@@ -44,6 +47,9 @@ Route::group(['middleware' => ['auth:sanctum', 'isUser']], function(){
     Route::resource('/job', JobController::class);
     Route::get('/job/myPost/show', [JobController::class, 'myPost']);
     Route::resource('/jobs_skill', PostSkillController::class);
+    Route::post('/employee/postJob/{id}', [EmployeeController::class, 'requstJob']);
+    Route::post('/user/offerJob/{id}', [UserController::class, 'offerJob']);
+    Route::get('/test', [JobRequestController::class, 'jobRequests']);
 });
 
 // Route::resource('/job', JobController::class);
@@ -54,6 +60,7 @@ Route::post('/user/update/status/{id}', [UserController::class, 'changeStatus'])
 Route::get('/user/status/active', [UserController::class, 'getActiveUser']);
 Route::post('/job/update/status/{id}', [JobController::class, 'postStatusChange']);
 Route::get('/job/status/active', [JobController::class, 'getActivePost']);
+
 
 
 

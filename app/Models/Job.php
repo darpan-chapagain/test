@@ -17,8 +17,13 @@ class Job extends Model
         return $this->hasMany(PostSkill::class, 'job', 'id');
     }
 
+    public function requestJob(){
+        // dd($this->hasMany(JobRequest::class, 'job_id'));
+        return $this->hasMany(JobRequest::class, 'job_id', 'id');
+    }
+
     public function user(){
-        return $this->hasOne(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 }
