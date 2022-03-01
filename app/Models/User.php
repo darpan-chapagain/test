@@ -63,4 +63,10 @@ class User extends Authenticatable
     public function jobs(){
         return $this->hasMany(Job::class, 'user_id', 'id');
     }
+    public function blogs(){
+        return $this->hasMany(Blog::class, 'user_id', 'id');
+    }
+    public function blogComments(){
+        return $this->hasMany(BlogComment::class, 'user_id', 'id');
+    }
 }

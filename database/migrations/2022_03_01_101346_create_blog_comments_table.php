@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeesTable extends Migration
+class CreateBlogCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,18 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id('employee_id');
+        Schema::create('blog_comments', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('qualification')->nullable();
-            $table->integer('hourly_rate')->nullable();
-            $table->string('experience');
-            // $table->string('skills');
-            $table->string('employee_type')->nullable();
-            $table->integer('Job_Category_ID')->nullable();
+            $table->unsignedBigInteger('blog_id');
+            $table->string('comment');
+            $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade')->nullable();
-            $table->timestamps();
+            $table->foreign('blog_id')
+                ->references('id')->on('blogs')
+                ->onDelete('cascade')->nullable();
         });
     }
 
@@ -36,6 +35,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('blog_comments');
     }
 }

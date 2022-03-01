@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeesTable extends Migration
+class CreateUserRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id('employee_id');
+        Schema::create('user_roles', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('qualification')->nullable();
-            $table->integer('hourly_rate')->nullable();
-            $table->string('experience');
-            // $table->string('skills');
-            $table->string('employee_type')->nullable();
-            $table->integer('Job_Category_ID')->nullable();
+            $table->bigInteger('role_id')->unsigned()->nullable();
+            $table->timestamps();
+            $table->foreign('role_id')
+                ->references('id')->on('roles')
+                ->onDelete('cascade')->nullable();
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -36,6 +34,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('user_roles');
     }
 }

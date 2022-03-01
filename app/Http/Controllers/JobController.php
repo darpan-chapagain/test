@@ -29,7 +29,6 @@ class JobController extends Controller
     public function create(Request $request)
     {
         //show post except own post
-        
     }
 
     /**
@@ -56,8 +55,8 @@ class JobController extends Controller
 
         $job->save();
 
-        $reponse = ['title' => $job];
-        return response()->json($job);
+        $response = ['job' => $job];
+        return response()->json($response);
     }
 
     /**
@@ -126,7 +125,7 @@ class JobController extends Controller
     public function myPost()
     {
         $userID = auth()->user()->id;
-        $job = Job::where('user_id', $userID);
+        $job = Job::all()->where('user_id', $userID);
         $response = [
             'job' => $job
         ];
@@ -138,9 +137,11 @@ class JobController extends Controller
         $job = Job::find($id);
         $status = $job->status;
         if($status == 1){
-            $update = 2;
-        }else{
+            $update = 3;
+        }elseif($status == 3){
             $update = 1;
+        }elseif($status == 2){
+            $update = 4;
         }
         $job->update([
             'status' => $update
@@ -167,5 +168,56 @@ class JobController extends Controller
             'other_post' => $job,
         ];
         return response()->json($response);
+    }
+
+    public function getInProgressJobs(){
+        // dd('test');
+        $authUser = auth()->user();
+        // $job = Job::all()->where('user_id', $userID);
+        $jobs = Job::all()->where('user_id', $authUser->id);
+        // dd($job->requestJob);
+        // $request = $job->jobRequest;
+        // $job->user;
+        $offer = [];
+        $detailJob = [];
+        foreach($jobs as $job){
+            foreach($job->requestJob as $req){
+                // array_push($offer, $req->job_id);
+                $stat = $req->status;
+                $emp = $req->reqEmployee;
+                $employees = $emp->user;
+                if($stat == 2){
+                    array_push($offer, $employees); 
+                    array_push($detailJob, $job->id); 
+                // array_push($offer, $employees);
+                }
+            }
+        }
+        $response = [
+            'offers' => $offer,
+            'job' => $detailJob,
+        ];
+        return response($response);
+    }
+
+    public function completeJob(Request $request, $id){
+        $userID = auth()->user()->id;
+        $job = Job::select('*')
+            ->where('user_id', $userID)
+            ->where('id', $id)
+            ->first();
+        $req = $job->requestJob[0];
+        // $user = User::all()->where('id', $userID)->first();
+        // dd($req->status);
+        if ($req->status == 2){
+            $req->status = 4;
+            $job->status = 4;
+            // $user->points += 100;
+        }
+        $job->save();
+        $req->save();
+        $response = [
+            'job' => $job
+        ];
     }
 }

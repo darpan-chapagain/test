@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PostSkillController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobRequestController;
+use App\Http\Controllers\BlogController;
 
 
 
@@ -47,9 +48,18 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::resource('/job', JobController::class);
     Route::get('/job/myPost/show', [JobController::class, 'myPost']);
     Route::resource('/jobs_skill', PostSkillController::class);
-    Route::post('/employee/postJob/{id}', [EmployeeController::class, 'requstJob']);
-    Route::post('/user/offerJob/{id}', [UserController::class, 'offerJob']);
-    Route::get('/test', [JobRequestController::class, 'jobRequests']);
+    Route::post('/employee/requstJob/{id}', [EmployeeController::class, 'requstJob']);//request jobs from posted job
+    Route::post('/user/offerJob/{id}', [UserController::class, 'offerJob']);//offer job to an employee
+    Route::get('/user/myJob/jobRequests', [JobRequestController::class, 'jobRequests']); //this is to get job requests by employer
+    Route::get('/user/myJob/offers', [JobRequestController::class, 'getMyJobProposals']); //this is to get job offer to employer
+    Route::get('/employee/jobOffers', [JobRequestController::class, 'jobOffer']); //this is to get job offer to employee
+    Route::get('/job/inProgress/', [JobController::class, 'getInProgressJobs']); //this is to get job in progress
+    Route::post('/job/completeJob/{id}', [JobController::class, 'completeJob']); //this is to complete a job
+    Route::post('/user/chooseEmployee/{userId}/{jobId}', [UserController::class, 'chooseEmployee']); //this is to choose employee
+    Route::post('/user/rejectEmployee/{userId}/{jobId}', [UserController::class, 'rejectEmployee']); //this is to reject employee
+    Route::post('/employee/acceptJob/{jobId}', [EmployeeController::class, 'jobOfferStatus']);
+    Route::resource('/blog', BlogController::class);
+    //this is to accept jos by employee
 });
 
 // Route::resource('/job', JobController::class);

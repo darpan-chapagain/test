@@ -139,17 +139,27 @@ class EmployeeController extends Controller
         // dd($job->id);
         // dd($employee->employee_id);
         // dd($authUserId, $jobPostUserId);
-
+        
+        $empID = $employee->employee_id;
+        $employeeJob = JobRequest::where('employee_id', 1)->first();
+        // dd($employeeJob);
+        
         if($authUserId != $jobPostUserId){
-            $jobRequest = new JobRequest([
-                'employee_id' => $employee->employee_id,
-                'job_id' => $job->id,
-            ]);
-            $jobRequest->save();
-            $response = [
-                'job_request' => $jobRequest,
-                'message' => 'sucess',
-            ];
+            if($employeeJob){
+                $response = [
+                    'message' => 'Already requested',
+                ];
+            }else{
+                $jobRequest = new JobRequest([
+                    'employee_id' => $empID,
+                    'job_id' => $job->id,
+                ]);
+                $jobRequest->save();
+                $response = [
+                    'job_request' => $jobRequest,
+                    'message' => 'success',
+                ];
+            }
         }else{
             $response = [
                 'message' => 'Error: Unauthorized',
@@ -157,5 +167,34 @@ class EmployeeController extends Controller
         }
         return response()->json($response);
 
+    }
+
+    public function jobOfferStatus(Request $request, $jobId){
+        $authEmployee = auth()->user();
+        // dd($authEmployee->first_name);
+        $employee = Employee::all()->where('user_id', $authEmployee->id)->first();
+
+        $jobRequest = JobRequest::all()
+            ->where('employee_id', $employee->employee_id)
+            ->where('job_id', $jobId)
+            ->first();
+        // dd($jobRequest);
+        if($request->status == "yes") {
+            $jobRequest->status = 2;
+        }else{
+            $jobRequest->status = 4;
+        }
+        
+        $jobRequest->save();
+    }
+
+    public function rateEmployee(Request $request, $employeeId, $jobId){
+        $authUser = auth()->user();
+        $userRating = new EmployeeRating([
+            'user_id' => $authUser->id, 
+            'employee_id' => $employeeId,
+            'job_id' => $jobId,
+            'rating' => $request->rating,
+        ]);
     }
 }

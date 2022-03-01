@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Employee;
+use App\Models\UserRoles;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -20,13 +21,17 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed',
             'role_id' =>  'required'
         ]);
-        
+        // dd('test');
         try{
             $user = User::create([
                 'first_name' => $fields['first_name'],
                 // 'last_name' => $fields['last_name'],
                 'email' => $fields['email'],
                 'password' => bcrypt($fields['password']),
+            ]);
+
+            $userRole = UserRoles::create([
+                'user_id' => $user->id,
                 'role_id' => $fields['role_id']
             ]);
     
@@ -51,6 +56,7 @@ class AuthController extends Controller
                     'employee_type' => $request->employee_type,
                     'Job_Category_ID' => $request->Job_Category_ID,
                 ]);
+                
                 $type = 'employee';
             }else{
                 $type = 'user';
@@ -67,6 +73,7 @@ class AuthController extends Controller
             'success' => $success,
             'message' => $message,
             'id' => $user->id,
+            'type' => $type,
         ];
 
         return response()->json($response);

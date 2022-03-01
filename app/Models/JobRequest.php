@@ -13,10 +13,11 @@ class JobRequest extends Model
 
     protected $fillable = ['employee_id','job_id', 'status'];
 
-    public function employees(){
-        return $this->belongsTo(Emmployee::class, 'employee_id', 'employee_id');
+    public function reqEmployee(){
+        return $this->belongsTo(Employee::class, 'employee_id', 'employee_id');
     }
-    public function jobs(){
+    public function detailJob(){
+        // dd('test');
         return $this->belongsTo(Job::class, 'job_id', 'id');
     }
 }

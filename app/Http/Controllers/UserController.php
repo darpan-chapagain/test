@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all()->toArray();
-        return array_reverse($jobs);
+        return array_reverse($user);
     }
 
     /**
@@ -157,6 +157,7 @@ class UserController extends Controller
         // dd($employee->employee_id);
         // dd($authUserId, $employeeUserId);
 
+        // dd($employee);
         if($authUserId != $id){
             $job = new Job([
                 'user_id' => $authUserId,
@@ -188,5 +189,63 @@ class UserController extends Controller
             ];
         }
         return response()->json($response);
+    }
+
+    public function chooseEmployee(Request $request, $id, $jobId){
+        $authUser = auth()->user();
+        $employee = Employee::all()->where('user_id', $id)->first();
+        // dd($employee->employee_id);
+        $jobRequest = JobRequest::all()
+            ->where('employee_id', $employee->employee_id)
+            ->where('job_id', $jobId)
+            ->first();
+        $jobRequest->status = 2;
+        $jobRequest->save();
+        $otherRequests = JobRequest::where('job_id', $jobId)
+            ->where('job_employement_id', '!=', $jobRequest->job_employement_id);
+        $otherRequests->update(['status' => 3]);
+// dd($otherRequests);
+        // foreach($otherRequests as $otherRequest){
+        //     // dd($otherRequest->job_employement_id);
+        //     $otherRequest->status = 3;
+        //     $jobRequest->save();
+        // }
+        // $jobRequest->save();
+            $response = [
+            'status' => 'success',
+        ];
+        
+        return response()->json($response);
+
+    }
+
+    public function getPendingJob(Request $request, $id){
+        $authUser = auth()->user();
+        $jobRequest = JobRequest::all()
+            ->where('job_id', $jobId)
+            ->where('status', 2);
+        $jobRequest->save();
+        $response = [
+            'pending_jobs' => $jobRequest,
+        ];
+        return response()->json($response);
+    }
+
+    public function rejectEmployee(Request $request, $id, $jobId){
+        $authUser = auth()->user();
+        $employee = Employee::all()->where('user_id', $id)->first();
+        // dd($employee->employee_id);
+        $jobRequest = JobRequest::all()
+            ->where('employee_id', $employee->employee_id)
+            ->where('job_id', $jobId)
+            ->first();
+        $jobRequest->status = 3;
+        $jobRequest->save();
+            $response = [
+            'status' => 'success',
+        ];
+        
+        return response()->json($response);
+
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\UserRoles;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -24,7 +25,11 @@ class TestUserSeeder extends Seeder
             'Gender' => 'Male',
             'email'=> 'darpan@gmail.com',
             'password'=> Hash::make('pass'),
-            'role_id'=> 2,
         ]);
+
+        UserRoles::create([
+            'user_id' => 1,
+            'role_id' => 1,
+        ]); 
     }
 }
