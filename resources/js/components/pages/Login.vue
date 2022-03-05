@@ -1,34 +1,4 @@
 <template>
-    <!-- <div class="container h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12 col-md-6 offset-md-3">
-                <div class="card shadow sm">
-                    <div class="card-body">
-                        <h1 class="text-center">Login</h1>
-                        <hr/>
-                        <form action="javascript:void(0)" class="row" method="post">
-                            <div class="form-group col-12">
-                                <label for="email" class="font-weight-bold">Email</label>
-                                <input type="text" v-model="auth.email" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="form-group col-12">
-                                <label for="password" class="font-weight-bold">Password</label>
-                                <input type="password" v-model="auth.password" name="password" id="password" class="form-control">
-                            </div>
-                            <div class="col-12 mb-2">
-                                <button type="submit" :disabled="processing" @click="login" class="btn btn-primary btn-block">
-                                    {{ processing ? "Please wait" : "Login" }}
-                                </button>
-                            </div>
-                            <div class="col-12 text-center">
-                                <label>Don't have an account? <router-link :to="{name:'register'}">Register Now!</router-link></label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="main-div">
         <div class="login-card">
         <div class="image-holder">
@@ -39,22 +9,38 @@
             <h2>Sign In</h2>
             </div>
             <form action="javascript:void(0)" class="form-container">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email"
-                aria-describedby="emailHelp" placeholder="Enter Email" name="email" v-model="auth.email" autocomplete="email" autofocus required>
-            </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="email"
+                    aria-describedby="emailHelp" placeholder="Enter Email" name="email" v-model="auth.email" autocomplete="email" autofocus required>
+                </div>
+            <!-- <AuthInput
+                type="email"
+                formClass="form-group"            
+                lableText="Email" 
+                inputID= "email" 
+                input_placeholder="Enter Email"
+                in_name="email"
+                auto_complete="email"
+                in_auth:email="auth.email"
+            /> -->
+            
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control mb-2"
                 id="exampleInputPassword1" placeholder="Password" name="password" required v-model="auth.password"
                 autocomplete="current-password">
             </div>
-            <div class="form-group">
-                <a href="#">
-                    Forgot Password
-                </a>
-            </div>
+            <!-- <AuthInput
+                type="password"
+                formClass="form-group"            
+                lableText="Password" 
+                inputID= "exampleInputPassword1" 
+                input_placeholder="Password"
+                in_name="password"
+                auto_complete="current-password"
+                in_object:password="auth.password"
+            /> -->
             <div class="form-group">
                 <button type="submit" class="btn btn-lg btn-block sign-in-btn mb-2" :disabled="processing" @click="login">Log In</button>
             </div>
@@ -67,8 +53,12 @@
 
 <script>
 import { mapActions } from 'vuex'
+import AuthInput from '../app_component/AuthInput.vue'
 export default {
     name:"login",
+    components: {
+        AuthInput,
+    },
     data(){
         return {
             // loginImage: require("asset('images/signin.png')"), 

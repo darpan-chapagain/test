@@ -9,7 +9,7 @@
                 scroll-target="#scrolling-techniques-7"
                 height="70px"
                 >
-                <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+                <v-app-bar-nav-icon @click="drawer = !drawer" class="drawer d-lg-none d-md-none"></v-app-bar-nav-icon>
 
                 <v-toolbar-title>Title</v-toolbar-title>
 
@@ -97,9 +97,9 @@
                 class="overflow-y-auto"
                 max-height="100vh"
                 >
-                <v-container style="min-height: 100vh;">
+                <div style="min-height: 100vh; margin: 50px">
                     <router-view/>
-                </v-container>
+                </div>
                     <v-footer
                         dark
                         padless
@@ -191,7 +191,7 @@ export default {
 </script>
 
 <style>
-    ::-webkit-scrollbar {
+    body::-webkit-scrollbar {
     display: none;
 }
 </style>

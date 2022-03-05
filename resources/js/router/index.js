@@ -9,6 +9,9 @@ Vue.use(VueRouter)
 const Test = () => import('../components/pages/dateTest.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Login = () => import('../components/pages/Login.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Register = () => import('../components/pages/Register.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Application = () => import('../components/pages/Application.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Proposal = () => import('../components/pages/Proposal.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Profile = () => import('../components/pages/UserProfile.vue' /* webpackChunkName: "resource/js/components/register" */)
 /* Guest Component */
 
 /* Layouts */
@@ -35,10 +38,53 @@ const Routes = [
         //     }
         //     next();
         // }
-    },{
+    },
+    {
         name:"test",
         path:"/test",
         component:Test,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },{
+        name:"application",
+        path:"/application",
+        component:Application,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },{
+        name:"proposal",
+        path:"/proposal",
+        component:Proposal,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },{
+        name:"profile",
+        path:"/profile",
+        component:Profile,
         meta:{
             middleware:"guest",
             title:`Login`
