@@ -1,6 +1,6 @@
 <template>
   <div class="job-post">
-        <div >
+        <div v-for="n in 3" :key="n">
             <!-- <h5>Job Title: Lorem ipsum dolor sit amet.</h5>
             <div class="attributes">
                 <v-chip outlined color="green" class="m-1">Hourly/Price: $###</v-chip>
@@ -12,9 +12,6 @@
             <div class="description">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, magni et ducimus cum eligendi similique corrupti porro quos nemo, veritatis atque quae facere totam odio harum hic excepturi quasi quam deleniti nostrum in voluptas, obcaecati delectus repellendus! Dolore fugiat architecto facere! Odit ...
             </div> -->
-            <AJob />
-            <AJob />
-            <AJob />
             <AJob />
         </div>
     </div>

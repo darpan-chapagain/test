@@ -6,12 +6,15 @@ Vue.use(VueRouter)
 
 /* Guest Component */
 // const Test = () => import('../components/pages/test.vue' /* webpackChunkName: "resource/js/components/login" */)
-const Test = () => import('../components/pages/dateTest.vue' /* webpackChunkName: "resource/js/components/login" */)
+const Test = () => import('../components/pages/Arequest.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Login = () => import('../components/pages/Login.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Register = () => import('../components/pages/Register.vue' /* webpackChunkName: "resource/js/components/register" */)
 const Application = () => import('../components/pages/Application.vue' /* webpackChunkName: "resource/js/components/register" */)
 const Proposal = () => import('../components/pages/Proposal.vue' /* webpackChunkName: "resource/js/components/register" */)
 const Profile = () => import('../components/pages/UserProfile.vue' /* webpackChunkName: "resource/js/components/register" */)
+const PostJob = () => import('../components/pages/PostJob.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Proposals = () => import('../components/pages/Proposals.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Requests = () => import('../components/pages/Requests.vue' /* webpackChunkName: "resource/js/components/register" */)
 /* Guest Component */
 
 /* Layouts */
@@ -19,7 +22,8 @@ const DahboardLayout = () => import('../components/Layouts/Dashboard.vue' /* web
 /* Layouts */
 
 /* Authenticated Component */
-const Dashboard = () => import('../components/pages/Dashboard.vue' /* webpackChunkName: "resource/js/components/dashboard" */)
+const EmployeeDashboard = () => import('../components/pages/EmployeeDashboard.vue' /* webpackChunkName: "resource/js/components/dashboard" */)
+const UserDashboard = () => import('../components/pages/UserDashboard.vue' /* webpackChunkName: "resource/js/components/dashboard" */)
 /* Authenticated Component */
 
 
@@ -95,6 +99,48 @@ const Routes = [
         //     }
         //     next();
         // }
+    },{
+        name:"postJob",
+        path:"/postJob",
+        component:PostJob,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },{
+        name:"proposals",
+        path:"/proposals",
+        component:Proposals,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },{
+        name:"request",
+        path:"/requests",
+        component:Requests,
+        meta:{
+            middleware:"guest",
+            title:`Login`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
     },
     {
         name:"register",
@@ -120,12 +166,20 @@ const Routes = [
         children:[
             {
                 name:"dashboard",
-                path: '/dashboard',
-                component: Dashboard,
+                path: '/employee-dashboard',
+                component: EmployeeDashboard,
                 meta:{
                     title:`Dashboard`
                 }
-            }
+            },
+            {
+                name:"dashboard",
+                path: '/user-dashboard',
+                component: UserDashboard,
+                meta:{
+                    title:`Dashboard`
+                }
+            },
         ],
         // beforeRouteEnter(to, from, next) {
         //     if (!window.Laravel.isLogged) {

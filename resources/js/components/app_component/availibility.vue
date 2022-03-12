@@ -27,7 +27,7 @@
         justify-content-around
       "
     >
-      <h6 class="text-center my-0">Edot number of jobs at same time</h6>
+      <h6 class="text-center my-0">Edit number of jobs at same time</h6>
       <v-dialog v-model="dialog" width="1000">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" v-on="on" outlined color="indigo" small icon>
