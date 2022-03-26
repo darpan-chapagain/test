@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Employee;
+use App\Models\Job;
 use App\Models\UserRoles;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,6 +19,7 @@ class TestUserSeeder extends Seeder
      */
     public function run()
     {
+        
         User::create([
             'first_name' => 'test',
             'last_name' => 'last_test',
@@ -31,5 +34,21 @@ class TestUserSeeder extends Seeder
             'user_id' => 1,
             'role_id' => 1,
         ]); 
+
+        User::factory()->times(101)->create();
+        for($i=2;$i<=51;$i++){
+            UserRoles::create([
+                'user_id' => $i,
+                'role_id' => 2,
+            ]); 
+        }
+
+        Employee::factory()->times(50)->create();
+        for($i=2;$i<=51;$i++){
+            UserRoles::create([
+                'user_id' => $i,
+                'role_id' => 3,
+            ]); 
+        }
     }
 }

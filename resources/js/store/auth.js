@@ -50,7 +50,7 @@ export default({
         async login ({ dispatch }, credentials) {
             let response = await axios.post('/login', credentials);
             
-            return dispatch('attempt', response.data).then(() => router.push({name:'UserDashboard'}));
+            return dispatch('attempt', response.data).then(() => router.push({name:'dashboard'}));
         },
         async register(_, credentials){
             let response = await axios.post('/register', credentials);

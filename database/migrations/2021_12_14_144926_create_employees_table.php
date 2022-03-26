@@ -20,7 +20,6 @@ class CreateEmployeesTable extends Migration
             $table->integer('hourly_rate')->nullable();
             $table->integer('project_rate')->nullable();
             $table->string('experience')->nullable();
-            $table->string('skill')->nullable();
             $table->string('employee_type')->nullable();
             $table->integer('Job_Category_ID')->nullable();
             $table->foreign('user_id')

@@ -26,8 +26,8 @@
             <v-icon>mdi-heart</v-icon>
           </v-btn>
 
-          <div class="navbar-nav m-3" v-if="isLoggedIn">
-            <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
+          <div class="navbar-nav m-3" v-if="this.authenticated">
+            <a class="nav-item nav-link" style="cursor: pointer"
               >Logout</a
             >
           </div>
@@ -125,14 +125,10 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import { mapActions } from "vuex";
 export default {
   name: "App",
-  created() {
-    if (window.Laravel.isLoggedin) {
-      this.isLoggedIn = true;
-    }
-  },
   data() {
     return {
       isLoggedIn: false,
@@ -142,32 +138,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      signOut: "auth/logout",
-    }),
-    created() {
-      if (window.Laravel.isLoggedin) {
-        this.isLoggedIn = true;
-      }
+    
+  }, 
+  computed: {
+      ...mapGetters({
+        authenticated: "auth/authenticated",
+        user: "auth/user",
+      }),
     },
-    async logout() {
-      await axios.get("/sanctum/csrf-cookie").then((response) => {
-        axios
-          .post("/api/logout")
-          .then((response) => {
-            if (response.data.success) {
-              console.log(response.data.success);
-              window.location.href = "/login";
-            } else {
-              console.log(response);
-            }
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-      });
-    },
-  },
 };
 </script>
 

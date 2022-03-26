@@ -1,68 +1,94 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import store from '../store'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import store from "../store";
 
-Vue.use(VueRouter)
+import auth from "./middleware/auth";
+import user from "./middleware/user";
+import employee from "./middleware/employee";
+import guest from "./middleware/guest";
+import admin from "./middleware/admin";
+import middlewarePipeline from "./middlewarePipeline";
+
+Vue.use(VueRouter);
 
 /* Guest Component */
-const Test2 = () => import('../components/pages/chat.vue' /* webpackChunkName: "resource/js/components/login" */)
-const Test = () => import('../components/pages/categoryTest.vue' /* webpackChunkName: "resource/js/components/login" */)
-const Login = () => import('../components/pages/Login.vue' /* webpackChunkName: "resource/js/components/login" */)
-const Register = () => import('../components/pages/Register.vue' /* webpackChunkName: "resource/js/components/register" */)
-const PostJob = () => import('../components/pages/PostJob.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Proposal = () => import('../components/pages/PostJob.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Requests = () => import('../components/pages/Requests.vue' /* webpackChunkName: "resource/js/components/register" */)
-const UserProfile = () => import('../components/pages/UserProfile.vue' /* webpackChunkName: "resource/js/components/register" */)
-const ARequest = () => import('../components/pages/Arequest.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Application = () => import('../components/pages/Application.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Test2 = () =>
+    import(
+        "../components/pages/chat.vue" /* webpackChunkName: "resource/js/components/login" */
+    );
+const Test = () =>
+    import(
+        "../components/pages/categoryTest.vue" /* webpackChunkName: "resource/js/components/login" */
+    );
+const Login = () =>
+    import(
+        "../components/pages/Login.vue" /* webpackChunkName: "resource/js/components/login" */
+    );
+const Register = () =>
+    import(
+        "../components/pages/Register.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
+const PostJob = () =>
+    import(
+        "../components/pages/PostJob.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
+const Proposal = () =>
+    import(
+        "../components/pages/PostJob.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
+const Requests = () =>
+    import(
+        "../components/pages/Requests.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
+const UserProfile = () =>
+    import(
+        "../components/pages/UserProfile.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
+const ARequest = () =>
+    import(
+        "../components/pages/Arequest.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
+const Application = () =>
+    import(
+        "../components/pages/Application.vue" /* webpackChunkName: "resource/js/components/register" */
+    );
 /* Guest Component */
 
 /* Layouts */
-const DahboardLayout = () => import('../components/Layouts/Dashboard.vue' /* webpackChunkName: "resource/js/components/layouts/dashboard" */)
+const DashboardLayout = () =>
+    import(
+        "../components/Layouts/Dashboard.vue" /* webpackChunkName: "resource/js/components/layouts/dashboard" */
+    );
 /* Layouts */
 
 /* Authenticated Component */
-const EmployeeDashboard = () => import('../components/pages/EmployeeDashboard.vue' /* webpackChunkName: "resource/js/components/dashboard" */)
-const UserDashboard = () => import('../components/pages/UserDashboard.vue' /* webpackChunkName: "resource/js/components/dashboard" */)
+const EmployeeDashboard = () =>
+    import(
+        "../components/pages/EmployeeDashboard.vue" /* webpackChunkName: "resource/js/components/dashboard" */
+    );
+const UserDashboard = () =>
+    import(
+        "../components/pages/UserDashboard.vue" /* webpackChunkName: "resource/js/components/dashboard" */
+    );
 /* Authenticated Component */
-
+function requireAuth(to, from, next) {}
 
 const Routes = [
     {
-        name:"login",
-        path:"/login",
-        component:Login,
-        meta:{
-            middleware:"guest",
-            title:`Login`
+        name: "login",
+        path: "/login",
+        component: Login,
+        meta: {
+            middleware: [guest],
         },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"test",
-        path:"/test",
-        component:Test,
-        meta:{
-            middleware:"guest",
-            title:`Login`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"test",
-        path:"/test2",
-        component:Test2,
-        meta:{
-            middleware:"guest",
-            title:`Login`
+    },
+    {
+        name: "test",
+        path: "/test",
+        component: Test,
+        meta: {
+            middleware: "guest",
+            title: `Login`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -72,12 +98,12 @@ const Routes = [
         // }
     },
     {
-        name:"register",
-        path:"/register",
-        component:Register,
-        meta:{
-            middleware:"guest",
-            title:`Register`
+        name: "test",
+        path: "/test2",
+        component: Test2,
+        meta: {
+            middleware: "guest",
+            title: `Login`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -87,56 +113,75 @@ const Routes = [
         // }
     },
     {
-        path:"/",
-        name: 'dashboard',
-        component:DahboardLayout,
-        children:[
+        name: "register",
+        path: "/register",
+        component: Register,
+        meta: {
+            middleware: "guest",
+            title: `Register`,
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
+    {
+        path: "/dashboard",
+        name: "dashboard",
+        component: DashboardLayout,
+        meta: {
+            middleware: [auth],
+        },
+        children: [
             {
-                name:"UserDashboard",
-                path: '/user/dashboard',
+                name: "dashboard.user",
+                path: "dashboard/user",
                 component: UserDashboard,
-                // beforeEnter: (to, from, next) => {
-                //     let role = store.getters['auth/authenticated']
-                //     if(role == 1){
-                //         next()
-                //     }
-                //     if(role == 3){
-                //         router.push({
-                //             name: 'EmployeeDashboard'
-                //         })
-                //     }
-                // }
-                
+                // middleware: [auth, user],
+                meta: {
+                    middleware: [auth, user],
+                },
             },
             {
-                name:"EmployeeDashboard",
-                path: '/employee/dashboard',
+                name: "dashboard.employee",
+                path: "dashboard/employee",
                 component: EmployeeDashboard,
-                
-            }
-        ],
-        beforeEnter: (to, from, next) => {
-            if (!store.getters['auth/authenticated']){
-                return next({
-                    name: 'login'
-                })
-            }
-            next()
-        }
+                // middleware: [auth, employee],
+                meta: {
+                    middleware: [auth, employee],
+                },
+            },
+            {
+                name: "dashboard.admin",
+                path: "dashboard/admin",
+                component: EmployeeDashboard,
+                // middleware: [auth, employee],
+                meta: {
+                    middleware: [auth, admin],
+                },
+            },
+        ]
+    },
+    {
+        name: "postJob",
+        path: "/post-job",
+        component: PostJob,
         // beforeRouteEnter(to, from, next) {
-        //     if (!window.Laravel.isLogged) {
-        //         return next('login');
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
         //     }
         //     next();
         // }
     },
     {
-        name:"postJob",
-        path:"/post-job",
-        component:PostJob,
-        meta:{
-            middleware:"guest",
-            title:`PostJob`
+        name: "proposal",
+        path: "/proposal",
+        component: Proposal,
+        meta: {
+            middleware: "guest",
+            title: `proposal`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -146,12 +191,12 @@ const Routes = [
         // }
     },
     {
-        name:"proposal",
-        path:"/proposal",
-        component:Proposal,
-        meta:{
-            middleware:"guest",
-            title:`proposal`
+        name: "requests",
+        path: "/requests",
+        component: Requests,
+        meta: {
+            middleware: "guest",
+            title: `Requests`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -161,12 +206,12 @@ const Routes = [
         // }
     },
     {
-        name:"requests",
-        path:"/requests",
-        component:Requests,
-        meta:{
-            middleware:"guest",
-            title:`Requests`
+        name: "profile",
+        path: "/profile",
+        component: UserProfile,
+        meta: {
+            middleware: "guest",
+            title: `Profile`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -176,12 +221,12 @@ const Routes = [
         // }
     },
     {
-        name:"profile",
-        path:"/profile",
-        component:UserProfile,
-        meta:{
-            middleware:"guest",
-            title:`Profile`
+        name: "request",
+        path: "/request",
+        component: ARequest,
+        meta: {
+            middleware: "guest",
+            title: `request`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -191,12 +236,12 @@ const Routes = [
         // }
     },
     {
-        name:"request",
-        path:"/request",
-        component:ARequest,
-        meta:{
-            middleware:"guest",
-            title:`request`
+        name: "application",
+        path: "/application",
+        component: Application,
+        meta: {
+            middleware: "guest",
+            title: `Application`,
         },
         // beforeRouteEnter(to, from, next) {
         //     if (window.Laravel.isLogged) {
@@ -205,26 +250,32 @@ const Routes = [
         //     next();
         // }
     },
-    {
-        name:"application",
-        path:"/application",
-        component:Application,
-        meta:{
-            middleware:"guest",
-            title:`Application`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },
-]
+];
 
-var router  = new VueRouter({
-    mode: 'history',
-    routes: Routes
+var router = new VueRouter({
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: Routes,
+});
+
+router.beforeEach((to, from, next) => {
+    if (!to.meta.middleware) {
+        return next()
+    }
+    const middleware = to.meta.middleware
+
+    const context = {
+        to,
+        from,
+        next,
+        store
+    }
+
+    return middleware[0]({
+        ...context,
+        next: middlewarePipeline(context, middleware, 1)
+    })
+
 })
 
 // router.beforeEach((to, from, next) => {
@@ -247,4 +298,4 @@ var router  = new VueRouter({
 //     }
 // })
 
-export default router
+export default router;

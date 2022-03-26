@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\JobCategory;
+use App\Models\Employee;
+use App\Models\User;
+use App\Models\Job;
 
 
 class JobCategorySeeder extends Seeder
@@ -15,14 +18,13 @@ class JobCategorySeeder extends Seeder
      */
     public function run()
     {
-        JobCategory::create([
-            'category_name' => 'Programming'
-        ]);
-        JobCategory::create([
-            'category_name' => 'Driving'
-        ]);
-        JobCategory::create([
-            'category_name' => 'Plumbing'
-        ]);
+        $category = ['Programming', 'Driving', 'Plumbing', 'Digital Marketing', 'Dancing'];
+        foreach($category as $cat){
+            JobCategory::create([
+                'category_name' => $cat,
+            ]);
+        }
+        Job::factory()->times(25)->create();
+
     }
 }

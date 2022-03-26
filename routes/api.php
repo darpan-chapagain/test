@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     // Route::delete('delete/{id}', [JobsController::class, 'delete']);
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function(){
+// Route::group(['middleware' => ['auth:sanctum']], function(){
     // Route::post('create', [JobController::class, 'create']);
     // Route::get('edit/{id}', [JobController::class, 'edit']);
     // Route::post('update/{id}', [JobController::class, 'update']);
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/employee/accept/{jobId}', [EmployeeController::class, 'jobOfferStatus']);
     Route::resource('/blog', BlogController::class);
     //this is to accept jos by employee
-});
+// });
 Route::resource('/jobs/category', JobCategoryController::class);
 // Route::resource('/job', JobController::class);
 Route::resource('/skill', SkillController::class);
