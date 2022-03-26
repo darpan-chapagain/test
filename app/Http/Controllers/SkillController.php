@@ -26,15 +26,25 @@ class SkillController extends Controller
      */
     public function create(Request $request)
     {
-        //add Job
+        //add skill
+        // $i = 0;
+        // foreach($request as $req){
+        //     $skill = new Skill([
+        //         'skill' =>  $req[i],
+        //     ]);
+        //     $i+=1;
+        //     $skill = new Skill([
+        //         'skill' =>  $request->skill,
+        //     ]);
+        // }
         $skill = new Skill([
             'skill' =>  $request->skill,
         ]);
 
         $skill->save();
 
-        $reponse = ['skill' => $skill];
-        return response()->json($skill);
+        $response = ['skill' => $skill];
+        return response()->json($response);
     }
 
     /**
@@ -99,7 +109,7 @@ class SkillController extends Controller
         $skill = Skill::find($id)->update($request->all());
         // $job->update($request->all());
 
-        return response()->json('The job successfully updated');
+        return response()->json('The skill successfully updated');
 
     }
 

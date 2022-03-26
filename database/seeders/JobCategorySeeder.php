@@ -22,7 +22,7 @@ class JobCategorySeeder extends Seeder
             'category_name' => 'Driving'
         ]);
         JobCategory::create([
-            'category_name' => 'Plumbering'
+            'category_name' => 'Plumbing'
         ]);
     }
 }

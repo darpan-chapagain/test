@@ -5,16 +5,16 @@ import store from '../store'
 Vue.use(VueRouter)
 
 /* Guest Component */
-// const Test = () => import('../components/pages/test.vue' /* webpackChunkName: "resource/js/components/login" */)
-const Test = () => import('../components/pages/Arequest.vue' /* webpackChunkName: "resource/js/components/login" */)
+const Test2 = () => import('../components/pages/chat.vue' /* webpackChunkName: "resource/js/components/login" */)
+const Test = () => import('../components/pages/categoryTest.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Login = () => import('../components/pages/Login.vue' /* webpackChunkName: "resource/js/components/login" */)
 const Register = () => import('../components/pages/Register.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Application = () => import('../components/pages/Application.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Proposal = () => import('../components/pages/Proposal.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Profile = () => import('../components/pages/UserProfile.vue' /* webpackChunkName: "resource/js/components/register" */)
 const PostJob = () => import('../components/pages/PostJob.vue' /* webpackChunkName: "resource/js/components/register" */)
-const Proposals = () => import('../components/pages/Proposals.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Proposal = () => import('../components/pages/PostJob.vue' /* webpackChunkName: "resource/js/components/register" */)
 const Requests = () => import('../components/pages/Requests.vue' /* webpackChunkName: "resource/js/components/register" */)
+const UserProfile = () => import('../components/pages/UserProfile.vue' /* webpackChunkName: "resource/js/components/register" */)
+const ARequest = () => import('../components/pages/Arequest.vue' /* webpackChunkName: "resource/js/components/register" */)
+const Application = () => import('../components/pages/Application.vue' /* webpackChunkName: "resource/js/components/register" */)
 /* Guest Component */
 
 /* Layouts */
@@ -42,8 +42,7 @@ const Routes = [
         //     }
         //     next();
         // }
-    },
-    {
+    },{
         name:"test",
         path:"/test",
         component:Test,
@@ -58,79 +57,9 @@ const Routes = [
         //     next();
         // }
     },{
-        name:"application",
-        path:"/application",
-        component:Application,
-        meta:{
-            middleware:"guest",
-            title:`Login`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"proposal",
-        path:"/proposal",
-        component:Proposal,
-        meta:{
-            middleware:"guest",
-            title:`Login`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"profile",
-        path:"/profile",
-        component:Profile,
-        meta:{
-            middleware:"guest",
-            title:`Login`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"postJob",
-        path:"/postJob",
-        component:PostJob,
-        meta:{
-            middleware:"guest",
-            title:`Login`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"proposals",
-        path:"/proposals",
-        component:Proposals,
-        meta:{
-            middleware:"guest",
-            title:`Login`
-        },
-        // beforeRouteEnter(to, from, next) {
-        //     if (window.Laravel.isLogged) {
-        //         return next('dashboard');
-        //     }
-        //     next();
-        // }
-    },{
-        name:"request",
-        path:"/requests",
-        component:Requests,
+        name:"test",
+        path:"/test2",
+        component:Test2,
         meta:{
             middleware:"guest",
             title:`Login`
@@ -159,35 +88,138 @@ const Routes = [
     },
     {
         path:"/",
+        name: 'dashboard',
         component:DahboardLayout,
-        meta:{
-            middleware:"auth"
-        },
         children:[
             {
-                name:"dashboard",
-                path: '/employee-dashboard',
-                component: EmployeeDashboard,
-                meta:{
-                    title:`Dashboard`
-                }
+                name:"UserDashboard",
+                path: '/user/dashboard',
+                component: UserDashboard,
+                // beforeEnter: (to, from, next) => {
+                //     let role = store.getters['auth/authenticated']
+                //     if(role == 1){
+                //         next()
+                //     }
+                //     if(role == 3){
+                //         router.push({
+                //             name: 'EmployeeDashboard'
+                //         })
+                //     }
+                // }
+                
             },
             {
-                name:"dashboard",
-                path: '/user-dashboard',
-                component: UserDashboard,
-                meta:{
-                    title:`Dashboard`
-                }
-            },
+                name:"EmployeeDashboard",
+                path: '/employee/dashboard',
+                component: EmployeeDashboard,
+                
+            }
         ],
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']){
+                return next({
+                    name: 'login'
+                })
+            }
+            next()
+        }
         // beforeRouteEnter(to, from, next) {
         //     if (!window.Laravel.isLogged) {
         //         return next('login');
         //     }
         //     next();
         // }
-    }
+    },
+    {
+        name:"postJob",
+        path:"/post-job",
+        component:PostJob,
+        meta:{
+            middleware:"guest",
+            title:`PostJob`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
+    {
+        name:"proposal",
+        path:"/proposal",
+        component:Proposal,
+        meta:{
+            middleware:"guest",
+            title:`proposal`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
+    {
+        name:"requests",
+        path:"/requests",
+        component:Requests,
+        meta:{
+            middleware:"guest",
+            title:`Requests`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
+    {
+        name:"profile",
+        path:"/profile",
+        component:UserProfile,
+        meta:{
+            middleware:"guest",
+            title:`Profile`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
+    {
+        name:"request",
+        path:"/request",
+        component:ARequest,
+        meta:{
+            middleware:"guest",
+            title:`request`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
+    {
+        name:"application",
+        path:"/application",
+        component:Application,
+        meta:{
+            middleware:"guest",
+            title:`Application`
+        },
+        // beforeRouteEnter(to, from, next) {
+        //     if (window.Laravel.isLogged) {
+        //         return next('dashboard');
+        //     }
+        //     next();
+        // }
+    },
 ]
 
 var router  = new VueRouter({

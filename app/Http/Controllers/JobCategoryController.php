@@ -15,6 +15,8 @@ class JobCategoryController extends Controller
     public function index()
     {
         //
+        $jobCategory = JobCategory::all()->toArray();
+        return array_reverse($jobCategory);
     }
 
     /**
@@ -22,9 +24,25 @@ class JobCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        // $i = 0;
+        // foreach($request as $req){
+        //     $jobCategory = new JobCategory([
+        //         'skill' =>  $req,
+        //     ]);
+        //     $i+=1;
+        // 
+        // }
+        $jobCategory = new JobCategory([
+            'job_category' =>  $request->skill,
+        ]);
+
+        $jobCategory->save();
+
+        $response = ['job_category' => $jobCategory];
+        return response()->json($response);
     }
 
     /**
@@ -46,8 +64,12 @@ class JobCategoryController extends Controller
      */
     public function show(JobCategory $jobCategory)
     {
-        //
-    }
+        $jobCategory = JobCategory::all();
+
+        $response = [
+            'job_category' => $jobCategory
+        ];
+        return response()->json($response);    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,8 +79,11 @@ class JobCategoryController extends Controller
      */
     public function edit(JobCategory $jobCategory)
     {
-        //
-    }
+        $jobCategory = JobCategory::find($id);
+        $response = [
+            'job_category' => $jobCategory
+        ];
+        return response()->json($jobCategory);    }
 
     /**
      * Update the specified resource in storage.
@@ -69,8 +94,10 @@ class JobCategoryController extends Controller
      */
     public function update(Request $request, JobCategory $jobCategory)
     {
-        //
-    }
+        $jobCategory = JobCategory::find($id)->update($request->all());
+        // $job->update($request->all());
+
+        return response()->json('The job category successfully updated');    }
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +107,9 @@ class JobCategoryController extends Controller
      */
     public function destroy(JobCategory $jobCategory)
     {
-        //
+        $jobCategory = JobCategory::find($id);
+        $jobCategory->delete();
+
+        return response()->json('The category successfully deleted');
     }
 }
