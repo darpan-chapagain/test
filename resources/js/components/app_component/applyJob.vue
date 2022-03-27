@@ -6,7 +6,7 @@
           <v-sheet rounded="lg" min-height="300">
             <v-sheet elevation="6" class="p-1 m-4">
               <div class="job-title m-4 centre">
-                <h3>Title</h3>
+                <h3>{{a_job_detail.title}}</h3>
                 <b-card-sub-title>User looking for employee</b-card-sub-title>
                 <v-divider></v-divider>
               </div>
@@ -15,7 +15,7 @@
                 <div class="d-flex flex-row align-items-center">
                   <h5 class="text-center my-0 p-3">Description</h5>
                   <v-chip class="ma-2" color="blue" text-color="white">
-                    category
+                    category: {{ a_job_detail.job_category_id }}
                     <v-icon right> mdi-star </v-icon>
                   </v-chip>
                 </div>
@@ -28,23 +28,17 @@
                   "
                 >
                   <p class="description p-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Culpa odio, aspernatur aperiam harum tempore numquam sint
-                    voluptas, ullam distinctio incidunt iusto officiis ducimus
-                    impedit beatae dolorum dolorem commodi in atque similique
-                    consectetur eius. Quia doloremque in officia, reprehenderit
-                    placeat ducimus aliquid modi labore molestiae, alias laborum
-                    suscipit eos, cupiditate at!
+                    {{ a_job_detail.description }}
                   </p>
                 </div>
                 <div class="attributes">
                   <v-chip outlined color="green" class="m-1">
                     <v-icon class="p-1">mdi-cash</v-icon>
-                    Hourly/Price: $###</v-chip
+                    ${{ a_job_detail.salary_offered }}</v-chip
                   >
                   <v-chip outlined class="m-1">
                     <v-icon class="p-1">mdi-brain</v-icon>
-                    Skill Level
+                    {{ a_job_detail.experience }}
                   </v-chip>
                   <v-chip outlined class="m-1">
                     <v-icon class="p-1">mdi-clock-time-four-outline</v-icon>
@@ -88,7 +82,7 @@
             <v-sheet elevation="6" class="p-1 m-4" min-height="400">
               <div class="job-title m-4 centre">
                 <h3>Client's Details</h3>
-                <b-card-sub-title>Darpan Chapagain</b-card-sub-title>
+                <b-card-sub-title>{{ a_job_detail.user.first_name }} {{a_job_detail.last_name}}</b-card-sub-title>
                 <v-divider></v-divider>
               </div>
 
@@ -99,17 +93,17 @@
                     <v-list-item two-line>
                       <v-list-item-content>
                         <v-list-item-title>Phone No</v-list-item-title>
-                        <v-list-item-subtitle>9843590522</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ a_job_detail.user.phone_no }}</v-list-item-subtitle>
 
                         <v-list-item-title>Address</v-list-item-title>
-                        <v-list-item-subtitle>Sinamangle</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ a_job_detail.user.address }}</v-list-item-subtitle>
 
                         <v-list-item-title>Gender</v-list-item-title>
-                        <v-list-item-subtitle>Male</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ a_job_detail.user.gender }}</v-list-item-subtitle>
 
                         <v-list-item-title>Email</v-list-item-title>
                         <v-list-item-subtitle
-                          >chapagaindarpan11@gmail.com</v-list-item-subtitle
+                          >{{ a_job_detail.user.email }}</v-list-item-subtitle
                         >
                       </v-list-item-content>
                     </v-list-item>
@@ -158,6 +152,9 @@
 <script>
 export default {
   name: "ApplyJob",
+  props: {
+    a_job_detail: Object,
+  }
 };
 </script>
 

@@ -80,10 +80,10 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Request $request)
     {
         //
-        $employee = Employee::find($id);
+        $employee = Employee::find($request->id);
         $response = [
             'employee' => $employee
         ];
@@ -100,7 +100,7 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         //
-        $employee = Employee::find($id)->update($request->all());
+        $employee = Employee::find($request->id)->update($request->all());
         $response = [
             'updated_employee' => $employee, 
             'message' => 'sucess',
@@ -115,10 +115,10 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Request $employee)
     {
         //
-        $employee = Employee::find($id);
+        $employee = Employee::find($employee->id);
         $employee->delete();
 
         $response = [
@@ -188,13 +188,25 @@ class EmployeeController extends Controller
         $jobRequest->save();
     }
 
-    public function rateEmployee(Request $request, $employeeId, $jobId){
-        $authUser = auth()->user();
-        $userRating = new EmployeeRating([
-            'user_id' => $authUser->id, 
-            'employee_id' => $employeeId,
-            'job_id' => $jobId,
-            'rating' => $request->rating,
-        ]);
+    public function getOtherEmployee(){
+        $userID = auth()->user()->id;
+        $employees = Employee::all()->except($userID);
+
+        foreach ($employees as $employee){
+            $employee->user;
+            $employee->categories;
+        }
+        
+        return response()->json($employees);
+
     }
+    // public function rateEmployee(Request $request, $employeeId, $jobId){
+    //     $authUser = auth()->user();
+    //     $userRating = new EmployeeRating([
+    //         'user_id' => $authUser->id, 
+    //         'employee_id' => $employeeId,
+    //         'job_id' => $jobId,
+    //         'rating' => $request->rating,
+    //     ]);
+    // }
 }

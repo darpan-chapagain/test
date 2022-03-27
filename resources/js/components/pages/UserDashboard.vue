@@ -46,8 +46,10 @@
           <v-container>
             <v-row>
               <h2 style="text-align: center">Find Employees!</h2>
-              <v-col v-for="n in 9" :key="n" cols="12" md="6" lg="4">
-                <Users />
+              <v-col v-for="a_user in allUsers" :key="a_user.employee_id" cols="12" md="6" lg="4">
+                <Users 
+                  :a_user="a_user"
+                />
               </v-col>
             </v-row>
           </v-container>
@@ -98,8 +100,20 @@ export default {
   name: "dashboard",
   data() {
     return {
-      user: this.$store.state.auth.user,
+      allUsers: [],
     };
+  },
+  methods: {
+    async fetchUsers() {
+      const res = await axios.get("employee/all");
+
+      const data = await res.data;
+
+      return data;
+    },
+  },
+  async created() {
+    this.allUsers = await this.fetchUsers();
   },
 };
 </script>

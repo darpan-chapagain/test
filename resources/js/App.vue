@@ -27,7 +27,7 @@
           </v-btn>
 
           <div class="navbar-nav m-3" v-if="this.authenticated">
-            <a class="nav-item nav-link" style="cursor: pointer"
+          <a class="nav-item nav-link" style="cursor: pointer" @click.prevent="logOut"
               >Logout</a
             >
           </div>
@@ -138,7 +138,16 @@ export default {
     };
   },
   methods: {
-    
+    ...mapActions({
+      signOutAction: 'auth/signOut',
+    }),
+    logOut() {
+      this.signOutAction().then(()=>{
+        this.$router.push({
+          name: 'login'
+        }).catch(()=>{})
+      })
+    },
   }, 
   computed: {
       ...mapGetters({

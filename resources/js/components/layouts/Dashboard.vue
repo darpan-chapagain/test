@@ -27,12 +27,12 @@ export default {
     },
     mounted () {
     if (this.role == 1) {
-      this.$router.push({name:'dashboard.admin'})
+      this.$router.push({name:'dashboard.admin'}).catch(()=>{})
     } else if (this.role == 2){
-      this.$router.push({name:'dashboard.user'})
+      this.$router.push({name:'dashboard.user'}).catch(()=>{})
     }
     else if (this.role == 3){
-      this.$router.push({name:'dashboard.employee'})
+      this.$router.push({name:'dashboard.employee'}).catch(()=>{})
     }
   }
     

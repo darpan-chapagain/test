@@ -13,4 +13,12 @@ class Employee_JobCategory extends Model
 
     protected $fillable = ['id','job_category_id', 'employee_id'];
 
+    // public function employee(){
+    //     return $this->belongsTo(Employee::class, 'employee_id', 'employee_id');
+    // }
+
+    // public function categories(){
+    //     return $this->belongsTo(JobCategory::class, 'job_category_id', 'job_category_id');
+    // }
+
 }

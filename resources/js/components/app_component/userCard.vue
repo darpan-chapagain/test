@@ -13,7 +13,7 @@
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
     ></v-img>
 
-    <v-card-title>Employee Name</v-card-title>
+    <v-card-title>{{ a_user.user.first_name }} {{ a_user.user.last_name }}</v-card-title>
 
     <v-card-text>
       <v-row align="center" class="">
@@ -35,13 +35,13 @@
           <div class="grey--text ms-4">
             <v-chip outlined color="green" class="m-1">
               <v-icon class="p-1">mdi-cash</v-icon>
-              $20</v-chip
+              ${{a_user.project_rate}}</v-chip
             >
           </div>
         </v-col>
       </v-row>
 
-      <div class="my-4 text-subtitle-1">Job Category</div>
+      <div class="my-4 text-subtitle-1">a_user.categories.category_name</div>
 
       <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
@@ -73,8 +73,12 @@
 <script>
 export default {
   name: "UserCard",
+  props: {
+    a_user: Object,
+  },
   data: () => ({
     loading: false,
+    selection: null,
   }),
 
   methods: {

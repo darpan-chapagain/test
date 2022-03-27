@@ -21,7 +21,13 @@
 
 <script>
 export default {
-    name: 'FilterBy'
+    name: 'FilterBy',
+    data(){
+        return{
+            radios: null,
+            value: null
+        }
+    }
 }
 </script>
 

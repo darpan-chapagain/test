@@ -219,7 +219,7 @@ class UserController extends Controller
 
     }
 
-    public function getPendingJob(Request $request, $id){
+    public function getPendingJob(Request $request, $jobId){
         $authUser = auth()->user();
         $jobRequest = JobRequest::all()
             ->where('job_id', $jobId)

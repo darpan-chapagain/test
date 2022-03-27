@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     // Route::delete('delete/{id}', [JobsController::class, 'delete']);
 });
 
-// Route::group(['middleware' => ['auth:sanctum']], function(){
+Route::group(['middleware' => ['auth:sanctum']], function(){
     // Route::post('create', [JobController::class, 'create']);
     // Route::get('edit/{id}', [JobController::class, 'edit']);
     // Route::post('update/{id}', [JobController::class, 'update']);
@@ -60,10 +60,13 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/user/choose/{userId}/{jobId}', [UserController::class, 'chooseEmployee']); //this is to choose employee
     Route::post('/user/reject/{userId}/{jobId}', [UserController::class, 'rejectEmployee']); //this is to reject employee
     Route::post('/employee/accept/{jobId}', [EmployeeController::class, 'jobOfferStatus']);
+    Route::get('/jobs/all/', [JobController::class, 'getOtherJobs']);
+    Route::get('/employee/all/', [EmployeeController::class, 'getOtherEmployee']);
     Route::resource('/blog', BlogController::class);
     //this is to accept jos by employee
-// });
+});
 Route::resource('/jobs/category', JobCategoryController::class);
+Route::resource('/employee', EmployeeController::class);
 // Route::resource('/job', JobController::class);
 Route::resource('/skill', SkillController::class);
 Route::resource('/user', UserController::class);

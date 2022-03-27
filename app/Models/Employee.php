@@ -11,7 +11,7 @@ class Employee extends Model
 
     protected $primaryKey = 'employee_id';
 
-    protected $fillable = ['user_id','qualification', 'hourly_rate', 'rating', 'experience', 'skills', 'employee_type', 'Job_Category_ID'];
+    protected $fillable = ['user_id','qualification', 'hourly_rate', 'rating', 'experience', 'skills', 'employee_type', 'job_category_id'];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
@@ -19,5 +19,9 @@ class Employee extends Model
 
     public function jobRequests(){
         return $this->hasMany(JobRequest::class, 'employee_id', 'employee_id');
+    }
+
+    public function categories(){
+        return $this->hasOne(JobCategory::class, 'job_category_id');
     }
 }

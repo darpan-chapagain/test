@@ -76,21 +76,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AJob",
   components: {
     ApplyJob: _applyJob_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: {},
+  props: {
+    a_job: Object
+  },
   data: function data() {
     return {
       dialog: false,
       notifications: false,
       sound: true,
-      widgets: false
+      widgets: false,
+      value: null
     };
   }
 });
@@ -258,14 +259,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ApplyJob"
+  name: "ApplyJob",
+  props: {
+    a_job_detail: Object
+  }
 });
 
 /***/ }),
@@ -438,9 +436,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Jobs',
+  props: {
+    allJobs: Array
+  },
   components: {
     AJob: _aJob_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -480,7 +484,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'FilterBy'
+  name: 'FilterBy',
+  data: function data() {
+    return {
+      radios: null,
+      value: null
+    };
+  }
 });
 
 /***/ }),
@@ -922,9 +932,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserCard",
+  props: {
+    a_user: Object
+  },
   data: function data() {
     return {
-      loading: false
+      loading: false,
+      selection: null
     };
   },
   methods: {
@@ -951,12 +965,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app_component/filter.vue */ "./resources/js/components/app_component/filter.vue");
-/* harmony import */ var _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app_component/dashboardJob.vue */ "./resources/js/components/app_component/dashboardJob.vue");
-/* harmony import */ var _app_component_user_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app_component/user.vue */ "./resources/js/components/app_component/user.vue");
-/* harmony import */ var _app_component_availibility_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app_component/availibility.vue */ "./resources/js/components/app_component/availibility.vue");
-/* harmony import */ var _app_component_myservices_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app_component/myservices.vue */ "./resources/js/components/app_component/myservices.vue");
-/* harmony import */ var _app_component_proposals_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app_component/proposals.vue */ "./resources/js/components/app_component/proposals.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app_component/filter.vue */ "./resources/js/components/app_component/filter.vue");
+/* harmony import */ var _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app_component/dashboardJob.vue */ "./resources/js/components/app_component/dashboardJob.vue");
+/* harmony import */ var _app_component_user_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app_component/user.vue */ "./resources/js/components/app_component/user.vue");
+/* harmony import */ var _app_component_availibility_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app_component/availibility.vue */ "./resources/js/components/app_component/availibility.vue");
+/* harmony import */ var _app_component_myservices_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app_component/myservices.vue */ "./resources/js/components/app_component/myservices.vue");
+/* harmony import */ var _app_component_proposals_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app_component/proposals.vue */ "./resources/js/components/app_component/proposals.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1045,6 +1069,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 
@@ -1053,18 +1080,69 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    FilterBy: _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Jobs: _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    User: _app_component_user_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Availability: _app_component_availibility_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    MyServices: _app_component_myservices_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Proposals: _app_component_proposals_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    FilterBy: _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Jobs: _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    User: _app_component_user_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Availability: _app_component_availibility_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    MyServices: _app_component_myservices_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Proposals: _app_component_proposals_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   name: "dashboard",
   data: function data() {
     return {
-      user: this.$store.state.auth.user
+      allJobs: []
     };
+  },
+  methods: {
+    fetchJobs: function fetchJobs() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_7___default().get('/jobs/all');
+
+              case 2:
+                res = _context.sent;
+                _context.next = 5;
+                return res.data;
+
+              case 5:
+                data = _context.sent;
+                return _context.abrupt("return", data);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this.fetchJobs();
+
+            case 2:
+              _this.allJobs = _context2.sent;
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -1080,11 +1158,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app_component/filter.vue */ "./resources/js/components/app_component/filter.vue");
-/* harmony import */ var _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app_component/dashboardJob.vue */ "./resources/js/components/app_component/dashboardJob.vue");
-/* harmony import */ var _app_component_user_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app_component/user.vue */ "./resources/js/components/app_component/user.vue");
-/* harmony import */ var _app_component_requests_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app_component/requests.vue */ "./resources/js/components/app_component/requests.vue");
-/* harmony import */ var _app_component_userCard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app_component/userCard.vue */ "./resources/js/components/app_component/userCard.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app_component/filter.vue */ "./resources/js/components/app_component/filter.vue");
+/* harmony import */ var _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app_component/dashboardJob.vue */ "./resources/js/components/app_component/dashboardJob.vue");
+/* harmony import */ var _app_component_user_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app_component/user.vue */ "./resources/js/components/app_component/user.vue");
+/* harmony import */ var _app_component_requests_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../app_component/requests.vue */ "./resources/js/components/app_component/requests.vue");
+/* harmony import */ var _app_component_userCard_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../app_component/userCard.vue */ "./resources/js/components/app_component/userCard.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
 //
 //
 //
@@ -1174,17 +1262,68 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    FilterBy: _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Jobs: _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    User: _app_component_user_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Requests: _app_component_requests_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Users: _app_component_userCard_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    FilterBy: _app_component_filter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Jobs: _app_component_dashboardJob_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    User: _app_component_user_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Requests: _app_component_requests_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Users: _app_component_userCard_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   name: "dashboard",
   data: function data() {
     return {
-      user: this.$store.state.auth.user
+      allUsers: []
     };
+  },
+  methods: {
+    fetchUsers: function fetchUsers() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get("employee/all");
+
+              case 2:
+                res = _context.sent;
+                _context.next = 5;
+                return res.data;
+
+              case 5:
+                data = _context.sent;
+                return _context.abrupt("return", data);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _this.fetchUsers();
+
+            case 2:
+              _this.allUsers = _context2.sent;
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 });
 
@@ -2740,7 +2879,7 @@ var render = function () {
         "div",
         { staticClass: "jobs p-5" },
         [
-          _c("h5", [_vm._v("Job Title: Lorem ipsum dolor sit amet update.")]),
+          _c("h5", [_vm._v(_vm._s(_vm.a_job.title))]),
           _vm._v(" "),
           _c(
             "div",
@@ -2751,7 +2890,7 @@ var render = function () {
                 { staticClass: "m-1", attrs: { outlined: "", color: "green" } },
                 [
                   _c("v-icon", { staticClass: "p-1" }, [_vm._v("mdi-cash")]),
-                  _vm._v("\n        Hourly/Price: $###"),
+                  _vm._v("\n        $" + _vm._s(_vm.a_job.salary_offered)),
                 ],
                 1
               ),
@@ -2761,7 +2900,9 @@ var render = function () {
                 { staticClass: "m-1", attrs: { outlined: "" } },
                 [
                   _c("v-icon", { staticClass: "p-1" }, [_vm._v("mdi-brain")]),
-                  _vm._v("\n        Skill Level\n      "),
+                  _vm._v(
+                    "\n        " + _vm._s(_vm.a_job.experience) + "\n      "
+                  ),
                 ],
                 1
               ),
@@ -2784,9 +2925,7 @@ var render = function () {
           _c("v-divider"),
           _vm._v(" "),
           _c("div", { staticClass: "description" }, [
-            _vm._v(
-              "\n      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, magni et\n      ducimus cum eligendi similique corrupti porro quos nemo, veritatis atque\n      quae facere totam odio harum hic excepturi quasi quam deleniti nostrum\n      in voluptas, obcaecati delectus repellendus! Dolore fugiat architecto\n      facere! Odit ...\n    "
-            ),
+            _vm._v("\n      " + _vm._s(_vm.a_job.description) + "\n    "),
           ]),
           _vm._v(" "),
           _c(
@@ -2881,7 +3020,7 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _c("ApplyJob"),
+                      _c("ApplyJob", { attrs: { a_job_detail: _vm.a_job } }),
                       _vm._v(" "),
                       _c(
                         "v-bottom-navigation",
@@ -2977,7 +3116,9 @@ var render = function () {
                             "div",
                             { staticClass: "job-title m-4 centre" },
                             [
-                              _c("h3", [_vm._v("Title")]),
+                              _c("h3", [
+                                _vm._v(_vm._s(_vm.a_job_detail.title)),
+                              ]),
                               _vm._v(" "),
                               _c("b-card-sub-title", [
                                 _vm._v("User looking for employee"),
@@ -3016,7 +3157,11 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                  category\n                  "
+                                        "\n                  category: " +
+                                          _vm._s(
+                                            _vm.a_job_detail.job_category_id
+                                          ) +
+                                          "\n                  "
                                       ),
                                       _c("v-icon", { attrs: { right: "" } }, [
                                         _vm._v(" mdi-star "),
@@ -3037,7 +3182,9 @@ var render = function () {
                                 [
                                   _c("p", { staticClass: "description p-2" }, [
                                     _vm._v(
-                                      "\n                  Lorem ipsum dolor sit amet consectetur adipisicing elit.\n                  Culpa odio, aspernatur aperiam harum tempore numquam sint\n                  voluptas, ullam distinctio incidunt iusto officiis ducimus\n                  impedit beatae dolorum dolorem commodi in atque similique\n                  consectetur eius. Quia doloremque in officia, reprehenderit\n                  placeat ducimus aliquid modi labore molestiae, alias laborum\n                  suscipit eos, cupiditate at!\n                "
+                                      "\n                  " +
+                                        _vm._s(_vm.a_job_detail.description) +
+                                        "\n                "
                                     ),
                                   ]),
                                 ]
@@ -3058,7 +3205,10 @@ var render = function () {
                                         _vm._v("mdi-cash"),
                                       ]),
                                       _vm._v(
-                                        "\n                  Hourly/Price: $###"
+                                        "\n                  $" +
+                                          _vm._s(
+                                            _vm.a_job_detail.salary_offered
+                                          )
                                       ),
                                     ],
                                     1
@@ -3075,7 +3225,9 @@ var render = function () {
                                         _vm._v("mdi-brain"),
                                       ]),
                                       _vm._v(
-                                        "\n                  Skill Level\n                "
+                                        "\n                  " +
+                                          _vm._s(_vm.a_job_detail.experience) +
+                                          "\n                "
                                       ),
                                     ],
                                     1
@@ -3213,7 +3365,11 @@ var render = function () {
                               _c("h3", [_vm._v("Client's Details")]),
                               _vm._v(" "),
                               _c("b-card-sub-title", [
-                                _vm._v("Darpan Chapagain"),
+                                _vm._v(
+                                  _vm._s(_vm.a_job_detail.user.first_name) +
+                                    " " +
+                                    _vm._s(_vm.a_job_detail.last_name)
+                                ),
                               ]),
                               _vm._v(" "),
                               _c("v-divider"),
@@ -3246,7 +3402,11 @@ var render = function () {
                                             ]),
                                             _vm._v(" "),
                                             _c("v-list-item-subtitle", [
-                                              _vm._v("9843590522"),
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.a_job_detail.user.phone_no
+                                                )
+                                              ),
                                             ]),
                                             _vm._v(" "),
                                             _c("v-list-item-title", [
@@ -3254,7 +3414,11 @@ var render = function () {
                                             ]),
                                             _vm._v(" "),
                                             _c("v-list-item-subtitle", [
-                                              _vm._v("Sinamangle"),
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.a_job_detail.user.address
+                                                )
+                                              ),
                                             ]),
                                             _vm._v(" "),
                                             _c("v-list-item-title", [
@@ -3262,7 +3426,11 @@ var render = function () {
                                             ]),
                                             _vm._v(" "),
                                             _c("v-list-item-subtitle", [
-                                              _vm._v("Male"),
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.a_job_detail.user.gender
+                                                )
+                                              ),
                                             ]),
                                             _vm._v(" "),
                                             _c("v-list-item-title", [
@@ -3271,7 +3439,9 @@ var render = function () {
                                             _vm._v(" "),
                                             _c("v-list-item-subtitle", [
                                               _vm._v(
-                                                "chapagaindarpan11@gmail.com"
+                                                _vm._s(
+                                                  _vm.a_job_detail.user.email
+                                                )
                                               ),
                                             ]),
                                           ],
@@ -3676,8 +3846,13 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "job-post" },
-    _vm._l(3, function (n) {
-      return _c("div", { key: n }, [_c("AJob")], 1)
+    _vm._l(_vm.allJobs, function (a_job) {
+      return _c(
+        "div",
+        { key: a_job.id },
+        [_c("AJob", { attrs: { a_job: a_job } })],
+        1
+      )
     }),
     0
   )
@@ -4204,7 +4379,13 @@ var render = function () {
         },
       }),
       _vm._v(" "),
-      _c("v-card-title", [_vm._v("Employee Name")]),
+      _c("v-card-title", [
+        _vm._v(
+          _vm._s(_vm.a_user.user.first_name) +
+            " " +
+            _vm._s(_vm.a_user.user.last_name)
+        ),
+      ]),
       _vm._v(" "),
       _c(
         "v-card-text",
@@ -4246,7 +4427,9 @@ var render = function () {
                         _c("v-icon", { staticClass: "p-1" }, [
                           _vm._v("mdi-cash"),
                         ]),
-                        _vm._v("\n            $20"),
+                        _vm._v(
+                          "\n            $" + _vm._s(_vm.a_user.project_rate)
+                        ),
                       ],
                       1
                     ),
@@ -4259,7 +4442,7 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "my-4 text-subtitle-1" }, [
-            _vm._v("Job Category"),
+            _vm._v("a_user.categories.category_name"),
           ]),
           _vm._v(" "),
           _c("div", [
@@ -4452,7 +4635,7 @@ var render = function () {
                         ),
                       ]),
                       _vm._v(" "),
-                      _c("Jobs"),
+                      _c("Jobs", { attrs: { allJobs: _vm.allJobs } }),
                     ],
                     1
                   ),
@@ -4650,14 +4833,14 @@ var render = function () {
                             [_vm._v("Find Employees!")]
                           ),
                           _vm._v(" "),
-                          _vm._l(9, function (n) {
+                          _vm._l(_vm.allUsers, function (a_user) {
                             return _c(
                               "v-col",
                               {
-                                key: n,
+                                key: a_user.employee_id,
                                 attrs: { cols: "12", md: "6", lg: "4" },
                               },
-                              [_c("Users")],
+                              [_c("Users", { attrs: { a_user: a_user } })],
                               1
                             )
                           }),

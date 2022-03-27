@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class JobCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['category_name'];
+
+    public function employees(){
+        return $this->hasOne(Employee::class, 'Job_Category_ID', 'job_category_id');
+    }
+
 }

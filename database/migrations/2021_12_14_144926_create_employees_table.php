@@ -21,9 +21,12 @@ class CreateEmployeesTable extends Migration
             $table->integer('project_rate')->nullable();
             $table->string('experience')->nullable();
             $table->string('employee_type')->nullable();
-            $table->integer('Job_Category_ID')->nullable();
+            $table->unsignedBigInteger('Job_Category_ID')->nullable();
             $table->foreign('user_id')
                 ->references('id')->on('users')
+                ->onDelete('cascade')->nullable();
+            $table->foreign('Job_Category_ID')
+                ->references('job_category_id')->on('job_categories')
                 ->onDelete('cascade')->nullable();
             $table->timestamps();
         });

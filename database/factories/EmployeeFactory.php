@@ -21,7 +21,7 @@ class EmployeeFactory extends Factory
             'project_rate' => $this->faker->numerify('####'),
             'experience' => $this->faker->randomElement(['Intermediated', 'Expert', 'Entry']),
             'employee_type' => $this->faker->randomElement(['Individual', 'Team']),
-            'Job_Category_ID' =>  rand(1,5),
+            'Job_Category_ID' =>  rand(1,4),
             // $faker->unique()->numberBetween($min = 1, $max = 50)
         ];
     }

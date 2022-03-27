@@ -163,11 +163,21 @@ class JobController extends Controller
 
     public function getOtherJobs(){
         $userID = auth()->user()->id;
-        $job = Job::all()->except($userID);
-        $reponse = [
-            'other_post' => $job,
+        // $users = [];
+        $totalJob = [];
+        $jobs = Job::all()->where('status', '=', 1)->except($userID);
+        foreach ($jobs as $job){
+            $job->user;
+            $job->requestJob;
+            // $job->requestJob;
+            // array_push($totalJob, $job);
+            // array_push($users, $user);
+        }
+        $response = [
+            'other_post' => $totalJob,
+            // 'users' => $user,
         ];
-        return response()->json($response);
+        return response()->json($jobs);
     }
 
     public function getInProgressJobs(){

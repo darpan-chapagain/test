@@ -17,18 +17,20 @@ Vue.use(Vuex)
 Vue.use(BootstrapVue)
 window.moment = require('moment');
 axios.defaults.baseURL ='http://127.0.0.1:8000/api/';
+require('./store/subscriber');
+store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
+    const app = new Vue({
+        vuetify: Vuetify, 
+        el: '#app',
+        router,
+        store,
+        moment:moment,
+        render: h=> h(App),
+        
+    });
+})
 
 
-//Register Routes
-
-const app = new Vue({
-    vuetify: Vuetify, 
-    el: '#app',
-    router,
-    store,
-    moment:moment,
-    render: h=> h(App),
-});
 
 
 // const app = new Vue({

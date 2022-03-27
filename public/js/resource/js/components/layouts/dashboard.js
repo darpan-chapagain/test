@@ -44,15 +44,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     if (this.role == 1) {
       this.$router.push({
         name: 'dashboard.admin'
-      });
+      })["catch"](function () {});
     } else if (this.role == 2) {
       this.$router.push({
         name: 'dashboard.user'
-      });
+      })["catch"](function () {});
     } else if (this.role == 3) {
       this.$router.push({
         name: 'dashboard.employee'
-      });
+      })["catch"](function () {});
     }
   }
 });

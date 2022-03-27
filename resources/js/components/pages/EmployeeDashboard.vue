@@ -39,7 +39,9 @@
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Deserunt, rerum.
             </div>
-            <Jobs />
+            <Jobs
+              :allJobs="allJobs"
+             />
           </v-card>
         </v-sheet>
       </v-col>
@@ -93,6 +95,7 @@ import User from "../app_component/user.vue";
 import Availability from "../app_component/availibility.vue";
 import MyServices from "../app_component/myservices.vue";
 import Proposals from "../app_component/proposals.vue";
+import axios from 'axios';
 
 export default {
   components: {
@@ -106,9 +109,21 @@ export default {
   name: "dashboard",
   data() {
     return {
-      user: this.$store.state.auth.user,
+      allJobs: []
     };
   },
+  methods: {
+    async fetchJobs(){
+      const res = await axios.get('/jobs/all');
+  
+      const data = await res.data;
+
+      return data;
+    }
+  }, 
+  async created(){
+    this.allJobs = await this.fetchJobs()
+  }
 };
 </script>
 

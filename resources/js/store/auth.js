@@ -1,77 +1,84 @@
 import axios from "axios";
-import router from '../router'
+import router from "../router";
 
-
-export default({
+export default {
     namespaced: true,
-    
+
     state: {
-        token: null, 
+        token: null,
         user: null,
         role: null,
-        authenticated: false,
+        authenticate: false,
     },
 
     getters: {
+        user(state) {
+            return state.user;
+        },
+
+        getRole(state) {
+            return state.role;
+        },
         authenticated(state) {
-            return state.authenticated
+            return state.authenticate;
         },
-
-        user (state){
-
-            console.log(state.user);
-            return state.user
-        },
-
-        getRole (state){
-            return state.role
-        }
     },
 
     mutations: {
-        SET_TOKEN (state, token) {
-            
-            state.token = token
-        }, 
-        SET_USER (state, user) {
-            state.user = user
+        SET_TOKEN(state, token) {
+            state.token = token;
         },
-        SET_ROLE (state, role){
-            state.role = role
+        SET_USER(state, user) {
+            console.log("test: ", user);
+            console.log("test: ", state.user);
+            state.user = user;
+            console.log("test2: ", state.user);
         },
-        SET_AUTHENTICATED (state){
-            if(state.token && state.user){
-                state.authenticated = true
-            }
-            console.log(state.authenticated);
-        }
+        SET_ROLE(state, role) {
+            state.role = role;
+        },
+        SET_AUTHENTICATED(state, data) {
+            state.authenticate = data;
+        },
     },
     actions: {
-        async login ({ dispatch }, credentials) {
-            let response = await axios.post('/login', credentials);
-            
-            return dispatch('attempt', response.data).then(() => router.push({name:'dashboard'}));
-        },
-        async register(_, credentials){
-            let response = await axios.post('/register', credentials);
-            $router.push({name:'login'})
-            
-            console.log(response.data);
-        },
-        async attempt ({ commit }, data) {
-            commit('SET_TOKEN', data.token)
+        async login({ dispatch }, credentials) {
+            await axios.get('/sanctum/csrf-cookie')
+            let response = await axios.post("/login", credentials);
 
-            try{
-                let response = await axios.get('/me/data')
-                console.log(response.data, response.data);
-                commit('SET_USER', response.data.user);
-                commit('SET_ROLE', response.data.role);
-                commit('SET_AUTHENTICATED', response.data);
-            } catch (e){
-                    commit('SET_TOKEN', null);
-                    commit('SET_USER', null);
-                    commit('SET_ROLE', null);
+            return dispatch("attempt", response.data.token).then(() =>
+                router.push({ name: "dashboard" })
+            );
+        },
+        async register(_, credentials) {
+            let response = await axios.post("/register", credentials);
+            $router.push({ name: "login" });
+
+            console.log(response.data.token);
+        },
+        async attempt({ commit }, token) {
+            commit("SET_TOKEN", token);
+
+            try {
+                let response = await axios.get("/me/data");
+                commit("SET_USER", response.data.user);
+                commit("SET_ROLE", response.data.role);
+                commit("SET_AUTHENTICATED", true);
+            } catch (e) {
+                commit("SET_TOKEN", null);
+                commit("SET_USER", null);
+                commit("SET_ROLE", null);
+                commit("SET_AUTHENTICATED", false);
             }
-        }
+        },
+        signOut({ commit }) {
+            return axios.post("/logout").then(() => {
+                commit("SET_TOKEN", null);
+                commit("SET_USER", null);
+                commit("SET_ROLE", null);
+                commit('SET_AUTHENTICATED', false)
+                localStorage.removeItem('token')
+            });
+        },
     },
-})
+};
