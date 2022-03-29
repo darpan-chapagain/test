@@ -194,7 +194,7 @@ class EmployeeController extends Controller
 
         foreach ($employees as $employee){
             $employee->user;
-            $employee->categories;
+            $employee->jobCategories;
         }
         
         return response()->json($employees);

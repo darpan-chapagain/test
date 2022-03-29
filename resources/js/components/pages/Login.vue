@@ -2,7 +2,7 @@
   <div class="main-div">
     <div class="login-card">
       <div class="image-holder">
-        <img src="images/signin.png" alt="image" class="img-fluid" />
+        <img src="../../../../public/images/202203281818DSC00425.JPG" alt="image" class="img-fluid" />
       </div>
       <div class="form-holder">
         <div>

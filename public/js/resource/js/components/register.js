@@ -1868,6 +1868,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "register",
@@ -1942,11 +1947,94 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({
     //for tabs
+    formData: function formData() {
+      var userForm = new FormData();
+      userForm.append("profile", this.user.profile, this.user.profile.name); // userForm.append("first_name", this.user.first_name);
+      // userForm.append("last_name", this.user.last_name);
+      // userForm.append("email", this.user.email);
+      // userForm.append("password", this.user.password);
+      // userForm.append("password_confirmation", this.user.password_confirmation);
+      // userForm.append("gender", this.user.gender);
+
+      for (var sk in this.user.skill) {
+        userForm.append("skill[]", this.user.skill[sk]);
+      }
+
+      ; // userForm.append("scope", this.user.scope);
+      // userForm.append("experience", this.user.experience);
+      // userForm.append("category", this.user.category);
+      // userForm.append("description", this.user.description);
+      // userForm.append("title", this.user.title);
+      // userForm.append("search", this.user.search);
+      // userForm.append("hourly_rate", this.user.hourly_rate);
+      // userForm.append("project_rate", this.user.project_rate);
+      // userForm.append("employee_type", this.user.employee_type);
+      // userForm.append("qualification", this.user.qualification);
+      // userForm.append("about", this.user.about);
+      // userForm.append("address", this.user.address);
+      // userForm.append("city", this.user.city);
+      // userForm.append("province", this.user.province);
+      // userForm.append("phone_number", this.user.phone_number);
+      // userForm.append("education", this.user.education);
+      // userForm.append("role_id", this.user.role_id);
+      // let formData = new FormData()
+      //   <!-- WE APPEND THE AVATAR TO THE FORMDATA WE'RE GONNA POST -->
+      //   formData.append('avatar', this.avatar)
+      //   _.each(this.formData, (value, key) => {
+      //     formData.append(key, value)
+      //   })
+
+      return userForm;
+    },
     submitUser: function submitUser() {
-      this.signUp(this.user);
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.signUp(_this.user);
+
+              case 2:
+                res = _context.sent;
+                console.log(res.data);
+                console.log(_this.user);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     },
     submitEmployee: function submitEmployee() {
-      this.signUp(this.user);
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.signUp(_this2.formData());
+
+              case 2:
+                res = _context2.sent;
+                console.log(res.data);
+                console.log(_this2.user);
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
     action: function action(ac) {
       if (ac == "register_user") {
@@ -2023,80 +2111,80 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //for skills
     getSkill: function getSkill() {
-      var _this = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res, skill_data, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get("skill");
-
-              case 2:
-                res = _context.sent;
-                skill_data = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  // console.log(res.data[i].skill);
-                  _this.items.push(res.data[i].skill);
-                }
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getCategories: function getCategories() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var res, skill_data, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get("jobs/category");
-
-              case 2:
-                res = _context2.sent;
-                skill_data = [];
-
-                for (i = 0; i < res.data.length; i++) {
-                  // console.log(res.data[i].skill);
-                  _this2.categories.push(res.data[i].category_name);
-                }
-
-              case 5:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    postSkill: function postSkill(val) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var res, skill_data, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
+                return axios.get("skill");
+
+              case 2:
+                res = _context3.sent;
+                skill_data = [];
+
+                for (i = 0; i < res.data.length; i++) {
+                  // console.log(res.data[i].skill);
+                  _this3.items.push(res.data[i].skill);
+                }
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    getCategories: function getCategories() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res, skill_data, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.get("jobs/category");
+
+              case 2:
+                res = _context4.sent;
+                skill_data = [];
+
+                for (i = 0; i < res.data.length; i++) {
+                  // console.log(res.data[i].skill);
+                  _this4.categories.push(res.data[i].category_name);
+                }
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    postSkill: function postSkill(val) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
                 return axios.post("api/jobs_skill", {
                   skill: val
                 });
 
               case 2:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3);
+        }, _callee5);
       }))();
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
@@ -2112,12 +2200,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return URL.createObjectURL(this.user.profile);
     },
     confirm_pass: function confirm_pass() {
-      var _this3 = this;
+      var _this5 = this;
 
       return [function (v) {
         return !!v || "Please enter password";
       }, function (v) {
-        return v === _this3.user.password || "Password do not match!";
+        return v === _this5.user.password || "Password do not match!";
       }];
     }
   },
@@ -2126,11 +2214,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.dateFormatted = this.formatDate(this.date);
     },
     skill: function skill(val) {
-      var _this4 = this;
+      var _this6 = this;
 
       if (val.length > 5) {
         this.$nextTick(function () {
-          return _this4.skill.pop();
+          return _this6.skill.pop();
         });
       }
     }
@@ -3102,7 +3190,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* *{\r\n    margin: 0px;\r\n    padding: 0px;\r\n    box-sizing: border-box;\r\n} */\n.main-div[data-v-62ff28b9] {\r\n  padding-top: 55px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  min-height: 96vh;\n}\n.login-card[data-v-62ff28b9] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-width: 320px;\r\n  align-items: center;\n}\n.image-holder[data-v-62ff28b9] {\r\n  padding-top: 25px;\r\n  width: 50%;\n}\n.image-holder img[data-v-62ff28b9] {\r\n  -o-object-fit: contain;\r\n     object-fit: contain;\r\n  -o-object-position: center;\r\n     object-position: center;\n}\n.form-holder[data-v-62ff28b9] {\r\n  margin-left: 5%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* justify-content: center; */\r\n  align-items: center;\n}\n.form-container[data-v-62ff28b9] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.form-group .form-input[data-v-62ff28b9] {\r\n  max-width: 400px;\r\n  min-width: 200px;\r\n  width: 100%;\n}\n.form-input-2[data-v-62ff28b9] {\r\n  max-width: 400px;\r\n  min-width: 300px;\r\n  width: 100%;\n}\n.form-group[data-v-62ff28b9] {\r\n  margin-bottom: 10px;\n}\n.work_type[data-v-62ff28b9] {\r\n  display: flex;\r\n  align-items: center;\n}\n.freelance[data-v-62ff28b9] {\r\n  margin-bottom: 0;\r\n  margin-right: 15px;\n}\n.btn[data-v-62ff28b9] {\r\n  max-width: 380px;\r\n  min-width: 240px;\r\n  width: 100%;\r\n  font-size: 18px;\n}\n.sign-in-btn[data-v-62ff28b9] {\r\n  background-color: #0c0b0b !important;\r\n  color: #ffffff !important;\n}\n@media only screen and (min-width: 769px) {\n.login-card[data-v-62ff28b9] {\r\n    flex-direction: row;\r\n    max-width: 1022px;\r\n    min-width: 768px;\r\n    width: 100%;\r\n    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;\n}\n.form-holder[data-v-62ff28b9] {\r\n    padding: 25px;\r\n    width: 40%;\n}\n.image-holder[data-v-62ff28b9] {\r\n    height: 100%;\n}\n.image-holder img[data-v-62ff28b9] {\r\n    height: 100%;\n}\n}\n@media only screen and (min-width: 1025px) {\n.login-card[data-v-62ff28b9] {\r\n    max-width: 1400px;\r\n    min-width: 1024px;\n}\n.name-group[data-v-62ff28b9] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    width: 420px;\r\n    justify-content: space-between;\n}\n.first-name-container[data-v-62ff28b9],\r\n  .last-name-container[data-v-62ff28b9] {\r\n    width: 200px;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* *{\r\n    margin: 0px;\r\n    padding: 0px;\r\n    box-sizing: border-box;\r\n} */\n.main-div[data-v-62ff28b9] {\r\n  padding-top: 55px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  width: 100%;\r\n  min-height: 96vh;\n}\n.login-card[data-v-62ff28b9] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  min-width: 320px;\r\n  align-items: center;\n}\n.image-holder[data-v-62ff28b9] {\r\n  padding-top: 25px;\r\n  width: 50%;\n}\n.image-holder img[data-v-62ff28b9] {\r\n  -o-object-fit: contain;\r\n     object-fit: contain;\r\n  -o-object-position: center;\r\n     object-position: center;\n}\n.form-holder[data-v-62ff28b9] {\r\n  margin-left: 5%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* justify-content: center; */\r\n  align-items: center;\n}\n.form-container[data-v-62ff28b9] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.form-group .form-input[data-v-62ff28b9] {\r\n  max-width: 400px;\r\n  min-width: 200px;\r\n  width: 100%;\n}\n.form-input-2[data-v-62ff28b9] {\r\n  max-width: 400px;\r\n  min-width: 300px;\r\n  width: 100%;\n}\n.form-group[data-v-62ff28b9] {\r\n  margin-bottom: 10px;\n}\n.work_type[data-v-62ff28b9] {\r\n  display: flex;\r\n  align-items: center;\n}\n.freelance[data-v-62ff28b9] {\r\n  margin-bottom: 0;\r\n  margin-right: 15px;\n}\n.btn[data-v-62ff28b9] {\r\n  max-width: 380px;\r\n  min-width: 240px;\r\n  width: 100%;\r\n  font-size: 18px;\n}\n.sign-in-btn[data-v-62ff28b9] {\r\n  background-color: #0c0b0b !important;\r\n  color: #ffffff !important;\n}\n@media only screen and (min-width: 769px) {\n.login-card[data-v-62ff28b9] {\r\n    flex-direction: row;\r\n    max-width: 1022px;\r\n    min-width: 768px;\r\n    width: 100%;\r\n    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;\n}\n.form-holder[data-v-62ff28b9] {\r\n    padding: 25px;\r\n    width: 40%;\n}\n.image-holder[data-v-62ff28b9] {\r\n    height: 100%;\n}\n.image-holder img[data-v-62ff28b9] {\r\n    height: 100%;\n}\n}\n@media only screen and (min-width: 1025px) {\n.login-card[data-v-62ff28b9] {\r\n    max-width: 1400px;\r\n    min-width: 1024px;\n}\n.name-group[data-v-62ff28b9] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    width: 420px;\r\n    justify-content: space-between;\n}\n.first-name-container[data-v-62ff28b9],\r\n  .last-name-container[data-v-62ff28b9] {\r\n    width: 200px;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6638,7 +6726,10 @@ var render = function () {
         "div",
         { staticClass: "form-holder" },
         [
-          _vm._m(1),
+          _c("div", [
+            _c("h2", [_vm._v("Sign In")]),
+            _vm._v("\n        " + _vm._s(this.user.profile) + "\n      "),
+          ]),
           _vm._v(" "),
           _c(
             "v-tabs",
@@ -6777,15 +6868,15 @@ var render = function () {
                             },
                             [
                               _c("v-radio", {
-                                attrs: { label: "Entry", value: "0" },
+                                attrs: { label: "Male", value: "male" },
                               }),
                               _vm._v(" "),
                               _c("v-radio", {
-                                attrs: { label: "Intermediate", value: "1" },
+                                attrs: { label: "Female", value: "female" },
                               }),
                               _vm._v(" "),
                               _c("v-radio", {
-                                attrs: { label: "Expert", value: "2" },
+                                attrs: { label: "Others", value: "others" },
                               }),
                             ],
                             1
@@ -6928,6 +7019,20 @@ var render = function () {
                                 ]
                               )
                             : _vm._e(),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _vm._v(
+                            "\n              Already registered?\n              "
+                          ),
+                          _c("router-link", { attrs: { to: "/login" } }, [
+                            _vm._v("Login Now! "),
+                          ]),
                         ],
                         1
                       ),
@@ -7781,7 +7886,8 @@ var render = function () {
                                                                 "Pick an avatar",
                                                               "prepend-icon":
                                                                 "mdi-camera",
-                                                              label: "Avatar",
+                                                              label:
+                                                                "Profile Picture",
                                                             },
                                                             model: {
                                                               value:
@@ -8508,7 +8614,8 @@ var render = function () {
                                                             "Pick an avatar",
                                                           "prepend-icon":
                                                             "mdi-camera",
-                                                          label: "Avatar",
+                                                          label:
+                                                            "Profile Picture",
                                                         },
                                                         model: {
                                                           value:
@@ -8728,12 +8835,6 @@ var staticRenderFns = [
         attrs: { src: "images/signin.png", alt: "image" },
       }),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Sign In")])])
   },
 ]
 render._withStripped = true

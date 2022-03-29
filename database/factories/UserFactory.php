@@ -24,6 +24,8 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('pass'),
+            'profile' => '202203281818DSC00425.JPG',
+            'profile_path' => 'public/images/202203281818DSC00425.JPG',
         ];
     }
 

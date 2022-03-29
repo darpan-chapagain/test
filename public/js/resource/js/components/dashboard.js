@@ -4442,7 +4442,7 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "my-4 text-subtitle-1" }, [
-            _vm._v("a_user.categories.category_name"),
+            _vm._v(_vm._s(_vm.a_user.job_categories.category_name)),
           ]),
           _vm._v(" "),
           _c("div", [

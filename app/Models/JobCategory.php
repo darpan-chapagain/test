@@ -12,7 +12,7 @@ class JobCategory extends Model
     protected $fillable = ['category_name'];
 
     public function employees(){
-        return $this->hasOne(Employee::class, 'Job_Category_ID', 'job_category_id');
+        return $this->hasMany(Employee::class, 'Job_Category_ID', 'job_category_id');
     }
 
 }

@@ -21,7 +21,7 @@ class Employee extends Model
         return $this->hasMany(JobRequest::class, 'employee_id', 'employee_id');
     }
 
-    public function categories(){
-        return $this->hasOne(JobCategory::class, 'job_category_id');
+    public function jobCategories(){
+        return $this->hasOne(JobCategory::class, 'job_category_id', 'Job_Category_ID');
     }
 }

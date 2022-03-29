@@ -7,6 +7,7 @@
       <div class="form-holder">
         <div>
           <h2>Sign In</h2>
+          {{ this.user.profile }}
         </div>
 
         <v-tabs v-model="tab">
@@ -54,9 +55,9 @@
                   row
                   required
                 >
-                  <v-radio label="Entry" value="0"></v-radio>
-                  <v-radio label="Intermediate" value="1"></v-radio>
-                  <v-radio label="Expert" value="2"></v-radio>
+                  <v-radio label="Male" value="male"></v-radio>
+                  <v-radio label="Female" value="female"></v-radio>
+                  <v-radio label="Others" value="others"></v-radio>
                 </v-radio-group>
               </div>
               <div class="form-group">
@@ -107,6 +108,10 @@
                 >
                   Continue to Register
                 </v-btn>
+              </div>
+              <div class="form-group">
+                Already registered?
+                <router-link to="/login">Login Now! </router-link>
               </div>
             </v-form>
           </v-tab-item>
@@ -334,7 +339,7 @@
                                   accept="image/png, image/jpeg, image/bmp"
                                   placeholder="Pick an avatar"
                                   prepend-icon="mdi-camera"
-                                  label="Avatar"
+                                  label="Profile Picture"
                                   v-model="user.profile"
                                 ></v-file-input>
                               </div>
@@ -529,7 +534,7 @@
                                 accept="image/png, image/jpeg, image/bmp"
                                 placeholder="Pick an avatar"
                                 prepend-icon="mdi-camera"
-                                label="Avatar"
+                                label="Profile Picture"
                                 v-model="user.profile"
                               ></v-file-input>
                             </div>
@@ -683,11 +688,60 @@ export default {
   },
   methods: {
     //for tabs
-    submitUser() {
-      this.signUp(this.user);
+    formData(){
+      let userForm = new FormData();
+
+      userForm.append("profile", this.user.profile, this.user.profile.name);
+
+      // userForm.append("first_name", this.user.first_name);
+      // userForm.append("last_name", this.user.last_name);
+      // userForm.append("email", this.user.email);
+      // userForm.append("password", this.user.password);
+      // userForm.append("password_confirmation", this.user.password_confirmation);
+      // userForm.append("gender", this.user.gender);
+      for(let sk in this.user.skill){
+        userForm.append("skill[]", this.user.skill[sk])
+      };
+      // userForm.append("scope", this.user.scope);
+      // userForm.append("experience", this.user.experience);
+      // userForm.append("category", this.user.category);
+      // userForm.append("description", this.user.description);
+      // userForm.append("title", this.user.title);
+      // userForm.append("search", this.user.search);
+      // userForm.append("hourly_rate", this.user.hourly_rate);
+      // userForm.append("project_rate", this.user.project_rate);
+      // userForm.append("employee_type", this.user.employee_type);
+      // userForm.append("qualification", this.user.qualification);
+      // userForm.append("about", this.user.about);
+      // userForm.append("address", this.user.address);
+      // userForm.append("city", this.user.city);
+      // userForm.append("province", this.user.province);
+      // userForm.append("phone_number", this.user.phone_number);
+      // userForm.append("education", this.user.education);
+      // userForm.append("role_id", this.user.role_id);
+      // let formData = new FormData()
+      //   <!-- WE APPEND THE AVATAR TO THE FORMDATA WE'RE GONNA POST -->
+      //   formData.append('avatar', this.avatar)
+
+      //   _.each(this.formData, (value, key) => {
+      //     formData.append(key, value)
+      //   })
+      
+      return userForm;
+
     },
-    submitEmployee() {
-      this.signUp(this.user);
+    async submitUser() {
+       let res = await this.signUp(this.user);
+      console.log(res.data);
+      console.log(this.user);
+
+    },
+    async submitEmployee() {
+    //  let res = await this.signUp(this.user);
+         let res = await this.signUp(this.formData());
+
+    console.log(res.data);
+     console.log(this.user)
     },
     action(ac) {
       if (ac == "register_user") {
@@ -698,7 +752,6 @@ export default {
       }
       if (ac == "change_tab") {
         if (this.validate("register")) {
-          
           this.changeTab();
         }
       }

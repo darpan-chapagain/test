@@ -41,7 +41,7 @@
         </v-col>
       </v-row>
 
-      <div class="my-4 text-subtitle-1">a_user.categories.category_name</div>
+      <div class="my-4 text-subtitle-1">{{ a_user.job_categories.category_name }}</div>
 
       <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,

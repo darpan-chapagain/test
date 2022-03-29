@@ -52,7 +52,7 @@ export default {
         },
         async register(_, credentials) {
             let response = await axios.post("/register", credentials);
-            $router.push({ name: "login" });
+            router.push({ name: "login" });
 
             console.log(response.data.token);
         },
