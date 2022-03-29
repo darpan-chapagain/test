@@ -1949,35 +1949,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //for tabs
     formData: function formData() {
       var userForm = new FormData();
-      userForm.append("profile", this.user.profile, this.user.profile.name); // userForm.append("first_name", this.user.first_name);
-      // userForm.append("last_name", this.user.last_name);
-      // userForm.append("email", this.user.email);
-      // userForm.append("password", this.user.password);
-      // userForm.append("password_confirmation", this.user.password_confirmation);
-      // userForm.append("gender", this.user.gender);
+      userForm.append("profile", this.user.profile.files, this.user.profile.name);
+      userForm.append("first_name", this.user.first_name);
+      userForm.append("last_name", this.user.last_name);
+      userForm.append("email", this.user.email);
+      userForm.append("password", this.user.password);
+      userForm.append("password_confirmation", this.user.password_confirmation);
+      userForm.append("gender", this.user.gender);
 
       for (var sk in this.user.skill) {
         userForm.append("skill[]", this.user.skill[sk]);
       }
 
-      ; // userForm.append("scope", this.user.scope);
-      // userForm.append("experience", this.user.experience);
-      // userForm.append("category", this.user.category);
-      // userForm.append("description", this.user.description);
-      // userForm.append("title", this.user.title);
-      // userForm.append("search", this.user.search);
-      // userForm.append("hourly_rate", this.user.hourly_rate);
-      // userForm.append("project_rate", this.user.project_rate);
-      // userForm.append("employee_type", this.user.employee_type);
-      // userForm.append("qualification", this.user.qualification);
-      // userForm.append("about", this.user.about);
-      // userForm.append("address", this.user.address);
-      // userForm.append("city", this.user.city);
-      // userForm.append("province", this.user.province);
-      // userForm.append("phone_number", this.user.phone_number);
-      // userForm.append("education", this.user.education);
-      // userForm.append("role_id", this.user.role_id);
-      // let formData = new FormData()
+      ;
+      userForm.append("scope", this.user.scope);
+      userForm.append("experience", this.user.experience);
+      userForm.append("category", this.user.category);
+      userForm.append("description", this.user.description);
+      userForm.append("title", this.user.title);
+      userForm.append("search", this.user.search);
+      userForm.append("hourly_rate", this.user.hourly_rate);
+      userForm.append("project_rate", this.user.project_rate);
+      userForm.append("employee_type", this.user.employee_type);
+      userForm.append("qualification", this.user.qualification);
+      userForm.append("about", this.user.about);
+      userForm.append("address", this.user.address);
+      userForm.append("city", this.user.city);
+      userForm.append("province", this.user.province);
+      userForm.append("phone_number", this.user.phone_number);
+      userForm.append("education", this.user.education);
+      userForm.append("role_id", this.user.role_id); // let formData = new FormData()
       //   <!-- WE APPEND THE AVATAR TO THE FORMDATA WE'RE GONNA POST -->
       //   formData.append('avatar', this.avatar)
       //   _.each(this.formData, (value, key) => {
@@ -8104,7 +8105,10 @@ var render = function () {
                                         "v-form",
                                         {
                                           ref: "form5",
-                                          attrs: { "lazy-validation": "" },
+                                          attrs: {
+                                            "lazy-validation": "",
+                                            enctype: "multipart/form-data",
+                                          },
                                           model: {
                                             value: _vm.valid,
                                             callback: function ($$v) {

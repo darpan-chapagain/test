@@ -18,7 +18,7 @@ const Test2 = () =>
     );
 const Test = () =>
     import(
-        "../components/pages/tests/categoryTest.vue" /* webpackChunkName: "resource/js/components/login" */
+        "../components/pages/tests/imageUploadtest.vue" /* webpackChunkName: "resource/js/components/login" */
     );
 const Login = () =>
     import(

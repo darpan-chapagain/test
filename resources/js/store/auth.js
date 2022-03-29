@@ -51,7 +51,15 @@ export default {
             );
         },
         async register(_, credentials) {
-            let response = await axios.post("/register", credentials);
+            let response = await axios({
+                method: 'post',
+                url: '/register',
+                data: credentials,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+
+                }
+            });
             router.push({ name: "login" });
 
             console.log(response.data.token);
